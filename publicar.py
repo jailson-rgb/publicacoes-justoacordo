@@ -1,10 +1,10 @@
 """
 Publicador da Justo Acordo.
 
-Lê a FILA APROVADA (planilha espelho da aba PUBLICAÇÕES JA, que só traz as linhas com APROVAR = Sim),
+Lê a FILA APROVADA (aba JUSTO ACORDO, espelho da aba PUBLICAÇÕES que só traz as linhas JA com APROVAR = Sim),
 publica no Instagram e/ou Facebook os posts cuja data/hora já chegou e ainda
 não foram publicados, e registra o resultado em status.csv (que a aba
-PUBLICAÇÕES JA lê para mostrar o STATUS).
+PUBLICAÇÕES lê para mostrar o STATUS).
 
 Configuração (GitHub > Settings > Secrets and variables > Actions):
   Secrets:   META_TOKEN       token de acesso (usuário do sistema / Página)
