@@ -53,11 +53,43 @@ Também serve de guia para pedidos avulsos.
   (nome, CPF/CNPJ, assinatura, valor) do devedor ou do credor.
 - Proibido: nome do devedor ou do credor, cidade, valor da dívida, percentual de honorários.
 
+## Conteúdo do Jailson (pasta 01 ENTRADA) – tem prioridade sobre a pesquisa
+- O Jailson (ou a Mariana) coloca na pasta **01 ENTRADA** qualquer material: texto, anotação, áudio transcrito,
+  print, PDF, foto, ou um simples arquivo .txt / Google Doc com a ideia. Pode ter instruções no nome ou no texto,
+  por exemplo: `PRIORIDADE`, `QUINTA`, `POST ÚNICO`, `CARROSSEL`, `MOSAICO`, `NÃO PUBLICAR ANTES DE dd/mm`.
+- Toda rodada de domingo:
+  1. Listar os arquivos da 01 ENTRADA e descartar os já usados (comparar com o campo `"entrada"` dos post.json em
+     `rascunhos/`).
+  2. Material novo vira a publicação de **quinta 12:00** (e, se for mais de um, também a de terça, no lugar da
+     pesquisa). O que tiver `PRIORIDADE` entra na semana seguinte; o resto entra em ordem de chegada.
+  3. Aproveitar o conteúdo no formato que pedir (ou o que o rodízio indicar), reescrevendo na linguagem da marca,
+     mas sem mudar o sentido técnico. Na dúvida sobre um ponto técnico, NÃO publicar a dúvida: preencher ALERTA
+     com a pergunta para o Jailson.
+  4. Gravar no post.json `"entrada": "<nome do arquivo> (<id do Drive>)"` e citar no resumo de domingo qual
+     material foi usado e o que ainda está na fila.
+  5. Nunca apagar nem mover arquivos da 01 ENTRADA.
+- Pedido avulso: o Jailson também pode pedir direto numa conversa; vale este mesmo guia.
+
+## Pilares de conteúdo (temas práticos aprovados pelo Jailson, 15/11/2026)
+1. **Placar e resultados** (stories, mosaico, "Números do mês") – regras da seção Números.
+2. **O acordo vira título executivo** – o termo de acordo assinado pelo devedor e por 2 testemunhas é título
+   executivo extrajudicial (CPC, art. 784, III); homologado em juízo, vira título executivo judicial (CPC, art. 515, III).
+   Mensagem prática: se o devedor descumprir, o credor não volta à estaca zero – cobra o título diretamente, sem
+   discutir de novo a dívida. Explicar em linguagem de empresário, sem prometer prazo nem resultado.
+3. **Garantias** – a Justo Acordo sempre busca uma garantia no acordo: **real** (ex.: hipoteca, alienação fiduciária,
+   penhor) ou **pessoal** (ex.: aval, fiança de sócio). Mensagem prática: acordo com garantia tem mais chance de ser
+   cumprido e, se não for, há mais por onde receber. Sem revelar como a garantia é negociada nem critérios internos.
+4. **Inadimplência no Brasil** (Serasa, Banco Central) – sempre com fonte e mês.
+5. **Boas práticas do credor** – documentos que guardar (nota, comprovante de entrega, contrato), não deixar a
+   dívida envelhecer, prescrição em termos gerais.
+6. **Bastidores e aprendizados** (layout `nota`) – sem caso identificável.
+- Cada mês deve passar por pelo menos 3 pilares diferentes; os pilares 2 e 3 entram pelo menos 1 vez por mês cada.
+
 ## Selo e argumento
 - "Cobrança extrajudicial **100% no êxito**: só recebemos quando o devedor paga." – vale só para a cobrança
   extrajudicial (o RVP/pré-processo é cobrado à parte; não generalizar).
 
-## Fontes para os carrosséis
+## Fontes para os carrosséis (quando não houver material na 01 ENTRADA)
 - Serasa Experian (inadimplência das empresas, recuperações judiciais e falências) e Banco Central
   (Estatísticas Monetárias e de Crédito – inadimplência PJ). Sempre citar fonte e mês de referência.
 - Conteúdo do Jailson na pasta ENTRADA. Nunca inventar número.
