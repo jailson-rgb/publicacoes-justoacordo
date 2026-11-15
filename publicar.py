@@ -204,7 +204,15 @@ def facebook(tipo, urls, legenda):
 def descobrir_ids():
     """Se IG_USER_ID / FB_PAGE_ID não foram configurados, descobre pelo token."""
     global IG_USER_ID, FB_PAGE_ID
-    if SIMULACAO or (IG_USER_ID and FB_PAGE_ID):
+    if SIMULACAO:
+        return
+    if IG_USER_ID and FB_PAGE_ID:
+        # confere a cada execução se o token ainda alcança as contas certas
+        ig = api("GET", IG_USER_ID, fields="username").get("username", "?")
+        pg = api("GET", FB_PAGE_ID, fields="name").get("name", "?")
+        log(f"Token OK · Instagram @{ig} · Página {pg}")
+        if ig != "justo.acordo" or "justo acordo" not in pg.lower():
+            raise SystemExit("IG_USER_ID / FB_PAGE_ID não são da Justo Acordo: nada será publicado.")
         return
     paginas = api("GET", "me/accounts", fields="id,name,instagram_business_account").get("data", [])
     if not paginas:
