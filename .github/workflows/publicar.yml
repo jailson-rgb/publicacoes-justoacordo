@@ -1,0 +1,44 @@
+name: Publicar posts aprovados
+
+on:
+  schedule:
+    - cron: "37 * * * *"  # de hora em hora (minuto 37, para não coincidir com a Soares)
+  workflow_dispatch: {}     # botão "Run workflow" para publicar na hora
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publicar-justoacordo
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pillow
+      - name: Configurar git
+        run: |
+          git config user.name "Publicador Justo Acordo"
+          git config user.email "actions@users.noreply.github.com"
+      - name: Publicar
+        env:
+          META_TOKEN: ${{ secrets.META_TOKEN }}
+          FILA_ID: ${{ vars.FILA_ID }}
+          IG_USER_ID: ${{ vars.IG_USER_ID }}
+          FB_PAGE_ID: ${{ vars.FB_PAGE_ID }}
+        run: python publicar.py
+      - name: Salvar status
+        if: always()
+        run: |
+          git add status.csv || true
+          if ! git diff --cached --quiet; then
+            git commit -m "status das publicações"
+            git pull --rebase
+            git push
+          fi

@@ -1,0 +1,81 @@
+# Rotina semanal de criação de posts – Justo Acordo
+
+Executada todo domingo às 18:43 pelo Claude (tarefa agendada). Lembrete de aprovação: segunda, 08:37.
+Também serve de guia para pedidos avulsos.
+
+## Onde fica cada coisa
+- Planilha VISÃO GERAL - JASA – `1EWl4M45oD3UbPBsDdoY-8jIS3own-YmZ_ObeFQcF2hI`
+  - aba **PUBLICAÇÕES JA** (aprovação; mesmas colunas da aba PUBLICAÇÕES da Soares, A–N).
+    Nunca escrever nas colunas APROVAR, OBSERVAÇÕES DO JAILSON e STATUS, nem na célula "APROVAR TUDO ATÉ".
+  - aba **POS ACORDO (CLIENTES)** – fonte dos números (só leitura). Nunca mexer em nenhuma outra aba.
+- Drive "PUBLICAÇÕES JUSTO ACORDO": 01 ENTRADA (fotos de termos e conteúdos do Jailson/Mariana),
+  02 POSTS GERADOS (artes), 03 PLACAR (snapshots semanais – nunca no GitHub), 04 Cartões e Perfis.
+- Renderizador: `gerador/render.py`; placar: `gerador/placar.py`.
+
+## Público e tom
+- Fala só com **empresas credoras** (indústria, comércio, serviços, agro, cooperativas). Nada dirigido a devedores.
+- Sem menção à Advocacia Soares nem à OAB. Nada que pareça oferta de serviço jurídico: a Justo Acordo faz
+  **mediação e negociação extrajudicial**.
+- Tom do manual da marca: seguro, amigável, confiante, cordial – "sério sem ser rígido". Linguagem de empresário.
+
+## Grade (horário de Brasília)
+- Segunda 12:00 – story **Placar** (acumulado) ou **Nesta semana** (se passar no piso, ver abaixo).
+- Terça 12:00 – carrossel (estatística de crédito/inadimplência ou educativo sobre recuperação extrajudicial).
+- Quinta 12:00 – carrossel (conteúdo do Jailson da pasta ENTRADA ou tema educativo).
+- **Acordo fechado** – 1 a 2 stories por semana quando houver acordo novo extrajudicial (terça a sexta, 09:00).
+- 1ª semana do mês: o carrossel de terça vira **"Números do mês"**.
+- DESTINO padrão: "Instagram + Facebook".
+
+## Números (regras aprovadas pelo Jailson em 15/11/2026)
+1. Exportar a aba POS ACORDO para CSV e rodar
+   `python gerador/placar.py pos.csv snapshot_semana_anterior.csv --novo-snapshot snapshot_hoje.csv`
+   (snapshots baixados/enviados para "03 PLACAR").
+2. Valor divulgado é sempre o **LÍQUIDO** (o que ficou com o cliente, já descontados os honorários).
+   **Nunca** mostrar bruto e líquido no mesmo post, nem o percentual de honorários (dá para deduzir o percentual).
+3. Só dinheiro **efetivamente recebido**; valor apenas acordado não entra.
+4. Arredondar sempre **para baixo** e por extenso ("R$ 1,9 milhão", "R$ 62 mil"); nunca centavos.
+5. Story "Nesta semana" só quando a semana tiver **≥ R$ 30 mil líquidos e ≥ 3 acordos novos**
+   (`publicar_semana: true`). Caso contrário, sai o **Placar** acumulado. Objetivo: nunca parecer operação pequena.
+6. Antes de publicar o acumulado, conferir duplicidades (mesmo acordo em várias linhas) e saldos negativos;
+   em caso de dúvida, preencher ALERTA e explicar.
+
+## Story "Acordo fechado"
+- Só acordos **extrajudiciais** (sem número de processo) – acordo judicial nunca vira post.
+- Precisa de **autorização do cliente credor** (uma vez por cliente) – registrar em OBSERVAÇÕES/ALERTA se não houver.
+- Conteúdo: segmento genérico do credor + UF (ex.: "INDÚSTRIA DE ALIMENTOS · RS"); "Dívida vencida desde mm/aaaa"
+  (antiga) ou "há N dias" (recente) – data tirada das notas/contrato na pasta do devedor; se não achar, omitir a linha;
+  forma do acordo; valor **líquido** que voltou ao caixa.
+- Foto do termo (pasta ENTRADA) entra **sempre desfocada** pelo renderizador, como fundo. Nunca dado legível
+  (nome, CPF/CNPJ, assinatura, valor) do devedor ou do credor.
+- Proibido: nome do devedor ou do credor, cidade, valor da dívida, percentual de honorários.
+
+## Selo e argumento
+- "Cobrança extrajudicial **100% no êxito**: só recebemos quando o devedor paga." – vale só para a cobrança
+  extrajudicial (o RVP/pré-processo é cobrado à parte; não generalizar).
+
+## Fontes para os carrosséis
+- Serasa Experian (inadimplência das empresas, recuperações judiciais e falências) e Banco Central
+  (Estatísticas Monetárias e de Crédito – inadimplência PJ). Sempre citar fonte e mês de referência.
+- Conteúdo do Jailson na pasta ENTRADA. Nunca inventar número.
+
+## Sigilo do know-how
+- Não revelar método, ferramentas de pesquisa patrimonial, critérios de seleção de casos, roteiros de negociação.
+
+## Formato
+- Carrossel: 4 a 7 lâminas (`capa`, `numero`/`topico`, `fechamento`). Story: 1 lâmina (`placar`, `semana`,
+  `acordo`, `story_numero`, `story`). Exemplos em `gerador/exemplos/`.
+- Legenda: 400–900 caracteres, parágrafos curtos, 3–6 hashtags (#recuperacaodecredito #cobrancaextrajudicial
+  #inadimplencia #negociacao #mediacao), terminar com "Justo Acordo · Mediação extrajudicial entre empresas ·
+  justoacordo.com.br".
+
+## Passo a passo
+1. Ler a aba PUBLICAÇÕES JA (último ID no formato JA2026-NNN).
+2. Rodar o placar; ver acordos novos extrajudiciais e fotos na pasta ENTRADA.
+3. Escrever o JSON de cada post e renderizar (`python gerador/render.py post.json saida/`).
+4. Enviar os PNG para "02 POSTS GERADOS" (`<ID>-01.png`...).
+5. Acrescentar uma linha por post na aba PUBLICAÇÕES JA (A–K).
+6. Resumo curto para o Jailson: posts, datas, alertas e o placar da semana (com e sem publicação).
+
+## LinkedIn
+- Publicar na Página Justo Acordo e depois compartilhar no perfil pessoal do Jailson ("Compartilhar com ideias",
+  frase curta dele). Sempre com legenda e hashtags; carrossel como PDF.
