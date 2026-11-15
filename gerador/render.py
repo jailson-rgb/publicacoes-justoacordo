@@ -29,8 +29,15 @@ O JSON descreve um post:
     {"layout": "pergunta", "chamada": "Pergunta de empresário", "pergunta": "...", "resposta": "...", "fundo": "areia|terra"},
     {"layout": "barras", "chamada": "...", "titulo": "...", "dados": [{"rotulo": "jun", "valor": 8.9, "texto": "8,9 mi"}], "fonte": "..."},
     {"layout": "resultado", "chamada": "Resultado de outubro", "valor": "R$ 210", "sufixo": "mil", "acordos": "18", "empresas": "9"}
+    {"layout": "nota", "data": "15/11/2026", "titulo": "...", "texto": "...", "assinatura": "Equipe Justo Acordo"}
   ]
 }
+PEÇAS LARGAS (em vez de "laminas", usar "largo"; o renderizador desenha uma arte larga e corta):
+  {"id": "...", "tipo": "Mosaico", "largo": {"layout": "mosaico", "chamada": "...", "titulo": "R$ 1,6 milhão",
+     "texto": "...", "rodapes": ["...", "...", "..."], "fundo": "terra|areia"}}
+     -> 01 (esquerda), 02 (meio), 03 (direita): 3 posts que formam uma imagem na grade do perfil.
+  {"id": "...", "tipo": "Carrossel", "largo": {"layout": "jornada", "tema": "...", "titulo": "...", "subtitulo": "...",
+     "passos": [{"titulo": "...", "texto": "..."}]}}  -> carrossel panorâmico contínuo (capa + 1 lâmina por etapa).
 Campos opcionais: "vencida" (some se vazio), "foto" (sem foto, o topo fica só com a cor da marca).
 A foto do termo é SEMPRE desfocada aqui (nunca publicar dados legíveis do devedor).
 Gera 01.png, 02.png...
@@ -425,6 +432,126 @@ LAYOUTS.update({"frase": l_frase, "dado": l_dado, "mito": l_mito, "comparativo":
                 "passos": l_passos, "pergunta": l_pergunta, "barras": l_barras, "resultado": l_resultado})
 
 
+def l_nota(l, n, total):
+    """Post estilo 'bloco de notas' (tendência de posts com cara de anotação pessoal)."""
+    data = e(l.get("data", ""))
+    c = f'''<div style="position:absolute;inset:88px;display:flex;flex-direction:column;justify-content:space-between">
+      {topo_feed(n, total, INK, False)}
+      <div style="background:#fff;border-radius:34px;box-shadow:0 18px 50px rgba(59,47,44,.14);padding:54px 56px 60px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:34px">
+          <div style="display:flex;gap:12px"><span style="width:18px;height:18px;border-radius:50%;background:{TERRA}"></span>
+            <span style="width:18px;height:18px;border-radius:50%;background:{ROSA2}"></span><span style="width:18px;height:18px;border-radius:50%;background:{ROSA}"></span></div>
+          <p style="margin:0;font-size:24px;color:{INK};opacity:.6">{data}</p></div>
+        <p style="margin:0 0 26px;font-size:{l.get("tamanho", 50)}px;font-weight:700;line-height:1.15;color:{TERRA}">{e(l.get("titulo"))}</p>
+        <p style="margin:0;font-size:36px;line-height:1.5;color:{INK}">{e(l.get("texto"))}</p>
+        <p style="margin:34px 0 0;font-size:28px;font-weight:600;color:{VERDE}">— {e(l.get("assinatura", "Equipe Justo Acordo"))}</p></div>
+      {base_feed(INK, TERRA, False)}
+    </div>'''
+    return caixa(AREIA, c, 1350)
+
+
+LAYOUTS.update({"nota": l_nota})
+
+
+# ------------------------------------------------------------------ peças largas (cortadas em várias imagens)
+# 1) MOSAICO: 3 posts que formam uma imagem só na grade do perfil (tendência "puzzle feed").
+#    O perfil mostra cada post recortado em 3:4 (1012 px centrais de cada imagem 1080x1350): a arte larga
+#    tem 3 x 1012 px visíveis + 34 px de sobra nas bordas, e cada imagem leva 34 px extras de cada lado.
+# 2) PANORAMA: carrossel contínuo (a arte atravessa as lâminas ao deslizar).
+GRADE_VIS, GRADE_SOBRA = 1012, 34
+
+
+def w_mosaico(p):
+    bg, txt, dest, claro = cores(p, "terra")
+    W = 3 * GRADE_VIS + 2 * GRADE_SOBRA
+    x0 = GRADE_SOBRA
+    rod = p.get("rodapes", ["", "", ""])
+    rodapes = "".join(
+        f'<div style="position:absolute;left:{x0 + i * GRADE_VIS + 70}px;width:{GRADE_VIS - 140}px;bottom:96px;font-size:30px;line-height:1.35;color:{txt}">{e(t)}</div>'
+        for i, t in enumerate(rod))
+    faixa = ROSA if claro else ROSA
+    corpo = f'''
+    <img src="{u("assets/simb_terra.png")}" style="position:absolute;right:-60px;top:-80px;height:1520px;opacity:{0.22 if claro else 0.09}">
+    <div style="position:absolute;left:0;right:0;top:930px;height:10px;background:{faixa}"></div>
+    <div style="position:absolute;left:{x0 + 70}px;top:96px">{logo(claro, 300)}</div>
+    <p style="position:absolute;left:{x0 + 70}px;top:300px;margin:0;font-size:34px;font-weight:700;letter-spacing:8px;color:{ROSA if claro else VERDE}">{e(p.get("chamada", "")).upper()}</p>
+    <p data-fit="{3 * GRADE_VIS - 150}" style="position:absolute;left:{x0 + 50}px;top:350px;margin:0;white-space:nowrap;font-family:Corm;font-weight:600;font-size:{p.get("tamanho", 400)}px;line-height:1;color:{"#fff" if claro else TERRA}">{e(p.get("titulo"))}</p>
+    <p style="position:absolute;left:{x0 + 70}px;top:985px;width:{2 * GRADE_VIS}px;margin:0;font-size:52px;line-height:1.25;color:{txt}">{e(p.get("texto"))}</p>
+    {rodapes}
+    <div style="position:absolute;left:{x0 + 2 * GRADE_VIS + 70}px;width:{GRADE_VIS - 140}px;bottom:200px">{selo(txt, ROSA if claro else TERRA, 28)}</div>'''
+    return W, f'<div id="r" style="width:{W}px;height:1350px;background:{bg};position:relative;overflow:hidden;font-family:Cabin,sans-serif">{corpo}</div>', \
+        [(i * GRADE_VIS, 1080) for i in range(3)]
+
+
+def w_jornada(p):
+    """Carrossel panorâmico: uma linha contínua atravessa as lâminas, com uma etapa em cada."""
+    passos = p.get("passos", [])
+    n = len(passos) + 1
+    W = n * 1080
+    Y = 760
+    marcos = ""
+    for i, s in enumerate(passos, 1):
+        cx = i * 1080 + 540
+        ultimo = i == len(passos)
+        cor = TERRA if ultimo else VERDE
+        marcos += f'''
+        <div style="position:absolute;left:{cx - 70}px;top:{Y - 70}px;width:140px;height:140px;border-radius:50%;background:{TERRA if ultimo else AREIA};border:6px solid {TERRA};
+             display:flex;align-items:center;justify-content:center;font-family:Corm;font-weight:600;font-size:76px;color:{"#fff" if ultimo else TERRA}">{i}</div>
+        <p style="position:absolute;left:{i * 1080 + 110}px;width:860px;top:300px;margin:0;font-size:28px;font-weight:700;letter-spacing:6px;color:{ROSA2}">ETAPA {i} DE {len(passos)}</p>
+        <p style="position:absolute;left:{i * 1080 + 700}px;top:20px;margin:0;font-family:Corm;font-weight:600;font-size:440px;line-height:1;color:{ROSA};opacity:.4">{i}</p>
+        <p style="position:absolute;left:{i * 1080 + 110}px;width:860px;top:350px;margin:0;font-size:{s.get("tamanho", 78)}px;font-weight:700;line-height:1.1;color:{cor}">{e(s.get("titulo"))}</p>
+        <p style="position:absolute;left:{i * 1080 + 110}px;width:820px;top:{Y + 130}px;margin:0;font-size:44px;line-height:1.4;color:{INK}">{e(s.get("texto"))}</p>
+        <div style="position:absolute;left:{i * 1080 + 88}px;right:{W - (i + 1) * 1080 + 88}px;bottom:88px;display:flex;justify-content:space-between;align-items:flex-end;border-top:2px solid {ROSA2};padding-top:22px">
+          <p style="margin:0;font-size:28px;color:{INK}"><b>{i + 1:02d}</b> / {n:02d}</p>{selo(INK, TERRA, 22)}</div>'''
+    corpo = f'''
+    <div style="position:absolute;left:0;top:0;width:1080px;height:1350px;background:{TERRA}"></div>
+    <div style="position:absolute;left:0;top:0;width:1080px;height:1350px;overflow:hidden"><img src="{u("assets/simb_terra.png")}" style="position:absolute;right:-180px;top:250px;height:1150px;opacity:.14"></div>
+    <div style="position:absolute;left:88px;top:88px">{logo(True, 330)}</div>
+    <p style="position:absolute;left:88px;top:330px;margin:0;font-size:28px;font-weight:600;letter-spacing:6px;color:{ROSA}">{e(p.get("tema", "")).upper()}</p>
+    <p style="position:absolute;left:88px;width:880px;top:390px;margin:0;font-size:{p.get("tamanho", 80)}px;font-weight:700;line-height:1.08;color:#fff">{e(p.get("titulo"))}</p>
+    <p style="position:absolute;left:88px;width:860px;top:{Y + 90}px;margin:0;font-size:38px;line-height:1.35;color:{ROSA}">{e(p.get("subtitulo", ""))}</p>
+    <p style="position:absolute;left:88px;bottom:88px;margin:0;font-size:28px;color:#fff"><b>01</b> / {n:02d}</p>
+    <p style="position:absolute;right:{W - 1080 + 88}px;bottom:88px;margin:0;font-size:28px;font-weight:600;color:#fff">Arraste →</p>
+    <div style="position:absolute;left:640px;right:540px;top:{Y - 5}px;height:10px;background:{ROSA2}"></div>
+    <div style="position:absolute;left:560px;top:{Y - 40}px;width:80px;height:80px;border-radius:50%;background:{ROSA}"></div>
+    {marcos}'''
+    return W, f'<div id="r" style="width:{W}px;height:1350px;background:{AREIA};position:relative;overflow:hidden;font-family:Cabin,sans-serif">{corpo}</div>', \
+        [(i * 1080, 1080) for i in range(n)]
+
+
+LARGOS = {"mosaico": w_mosaico, "jornada": w_jornada}
+
+
+def renderizar_largo(post, saida, chrome=None):
+    """Renderiza a peça larga uma vez e corta nas imagens. No mosaico, 01 = esquerda, 02 = meio, 03 = direita
+    (na planilha, publicar 03 primeiro, depois 02 e por último 01)."""
+    os.makedirs(saida, exist_ok=True)
+    p = post["largo"]
+    W, corpo, cortes = LARGOS[p["layout"]](p)
+    arquivos = []
+    with sync_playwright() as pw:
+        kw = {"executable_path": chrome} if chrome else {}
+        b = pw.chromium.launch(args=["--allow-file-access-from-files"], **kw)
+        pg = b.new_page(viewport={"width": W, "height": 1350})
+        tmp = os.path.join(saida, "_tmp.html")
+        with open(tmp, "w", encoding="utf-8") as f:
+            f.write(f'<!doctype html><html><head><meta charset="utf-8"><style>{fontcss()}</style></head><body>{corpo}</body></html>')
+        pg.goto("file://" + os.path.abspath(tmp))
+        pg.evaluate("document.fonts.ready.then(()=>1)")
+        pg.evaluate("""() => document.querySelectorAll('[data-fit]').forEach(el => {
+            const alvo = +el.dataset.fit, fs = parseFloat(getComputedStyle(el).fontSize);
+            el.style.fontSize = Math.min(fs * alvo / el.scrollWidth, 540) + 'px'; })""")
+        pg.wait_for_timeout(300)
+        pg.locator("#r").screenshot(path=os.path.join(saida, "_inteira.png"))
+        for i, (x, w) in enumerate(cortes, 1):
+            a = os.path.join(saida, f"{i:02d}.png")
+            pg.screenshot(path=a, clip={"x": x, "y": 0, "width": w, "height": 1350})
+            arquivos.append(a)
+        os.remove(tmp)
+        b.close()
+    return arquivos
+
+
 def renderizar(post, saida, chrome=None):
     os.makedirs(saida, exist_ok=True)
     laminas = post["laminas"]
@@ -452,5 +579,6 @@ def renderizar(post, saida, chrome=None):
 if __name__ == "__main__":
     with open(sys.argv[1], encoding="utf-8") as f:
         post = json.load(f)
-    for a in renderizar(post, sys.argv[2], os.environ.get("CHROME_PATH")):
+    fn = renderizar_largo if "largo" in post else renderizar
+    for a in fn(post, sys.argv[2], os.environ.get("CHROME_PATH")):
         print(a)

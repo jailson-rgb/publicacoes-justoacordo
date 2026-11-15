@@ -76,7 +76,8 @@ O feed não pode parecer sempre o mesmo carrossel. Variar o FORMATO (uma lâmina
 **Layouts disponíveis** (`gerador/render.py`; exemplo de todos em `gerador/exemplos/exemplo-formatos.json`):
 - clássicos de carrossel: `capa`, `topico`, `numero`, `fechamento`;
 - variados (servem para post único e para montar carrosséis diferentes): `frase`, `dado`, `mito`, `comparativo`,
-  `checklist`, `passos`, `pergunta`, `barras`, `resultado`.
+  `checklist`, `passos`, `pergunta`, `barras`, `resultado`, `nota`;
+- largos (cortados em várias imagens): `mosaico` (3 posts na grade) e `jornada` (carrossel panorâmico).
 - Vários aceitam `"fundo": "terra" | "areia" | "rosa"` – alternar o fundo também conta como variação.
 
 **Regras de rodízio**
@@ -92,6 +93,25 @@ O feed não pode parecer sempre o mesmo carrossel. Variar o FORMATO (uma lâmina
 7. `barras` só com dados reais e fonte citada (Serasa, Banco Central ou a aba POS ACORDO agregada por mês).
 8. Gravar no `post.json` o campo `"formato"` (ex.: `"post único · dado"`, `"carrossel curto · mito+passos"`),
    para o rodízio da semana seguinte.
+
+
+### Formatos de tendência (pedido do Jailson, 15/11/2026)
+- **Mosaico na grade (3 posts = 1 imagem)** – layout largo `mosaico` (`gerador/exemplos/exemplo-mosaico.json`).
+  Uso: no máximo **1 vez por mês**, para um marco forte (placar acumulado redondo, resultado do mês, campanha).
+  - O renderizador gera 01 (esquerda), 02 (meio) e 03 (direita), já com a margem que a grade 3:4 do perfil corta.
+  - Na planilha: **3 linhas** "Post único", IDs seguidos, DESTINO **"Instagram"** (mosaico não faz sentido na Página
+    do Facebook), mesmo dia, publicando **03 primeiro**, depois 02 e por último 01, com 1 minuto de diferença
+    (ex.: 12:00 = imagem 03, 12:01 = 02, 12:02 = 01). O publicador segue a ordem de data/hora.
+  - Na semana do mosaico, ele substitui a publicação de feed daquele dia; legendas curtas e complementares
+    (cada post também precisa funcionar sozinho no feed). Avisar no resumo que os 3 precisam ser aprovados juntos.
+  - Só fica alinhado enquanto o número de posts de feed seguintes for múltiplo de 3; não tentar "manter" o mosaico.
+- **Carrossel panorâmico contínuo** – layout largo `jornada` (`gerador/exemplos/exemplo-jornada.json`): uma linha
+  atravessa as lâminas ao deslizar. Bom para processos e "caminho do crédito". Conta como carrossel longo no rodízio.
+- **Post estilo nota** – layout `nota` (post único com cara de anotação). Bom para aprendizados e bastidores
+  ("O que aprendemos em 210 acordos"), sempre sem caso identificável.
+- Posts com **pergunta** na legenda geram mais comentários: terminar ao menos 1 legenda por semana com uma pergunta
+  ao empresário.
+- Peças largas usam `"largo"` no JSON em vez de `"laminas"` (ver o cabeçalho de `gerador/render.py`).
 
 **Stories**: 1 lâmina (`placar`, `semana`, `acordo`, `story_numero`, `story`). Alternar entre `story_numero` e
 `story` nas semanas em que não houver acordo novo.
