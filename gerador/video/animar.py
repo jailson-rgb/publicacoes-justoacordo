@@ -7,7 +7,8 @@ Uso:
       SOBREPOSIÇÃO: a animação (fundo transparente) é aplicada por cima do vídeo gravado pelo Jailson.
       A duração é a do vídeo; o áudio é o do vídeo. O vídeo é ajustado para 1080x1920 (corta as sobras).
       No modelo, a variável CSS --fim recebe automaticamente (duração − 3 s), para o encerramento entrar no fim.
-  --trilha arquivo.mp3   (opcional) trilha instrumental livre de direitos: no vídeo só animado vira o áudio;
+  --trilha NOME          trilha instrumental própria da Justo Acordo (gerador/video/trilhas/: confianca, dialogo,
+                         conquista, reflexao) ou caminho de um .mp3. No vídeo só animado vira o áudio (com fade);
                          na sobreposição entra baixinha (15%) sob a voz.
 
 O HTML precisa ter um elemento #r de 1080x1920; as animações CSS são congeladas e avançadas quadro a quadro.
@@ -25,6 +26,8 @@ if "--sobre" in args:
     i = args.index("--sobre"); sobre = args[i + 1]; del args[i:i + 2]
 if "--trilha" in args:
     i = args.index("--trilha"); trilha = args[i + 1]; del args[i:i + 2]
+if trilha and not os.path.exists(trilha):  # aceita só o nome: --trilha confianca
+    trilha = os.path.join(os.path.dirname(os.path.abspath(__file__)), "trilhas", f"{trilha}.mp3")
 src, out = args[0], args[1]
 FPS = 30
 

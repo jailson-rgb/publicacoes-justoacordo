@@ -105,9 +105,16 @@ Reels SEM MP4 em ARQUIVOS (trend com áudio da biblioteca do Instagram) continua
      (o áudio é o dele; o encerramento entra sozinho nos 3 s finais);
    - vídeo bruto do Jailson NUNCA vai para o GitHub sem passar pela aprovação: só o MP4 final em `rascunhos/`.
      Vídeos acima de 90 s ou de 100 MB: avisar no resumo (cortar ou publicar manualmente).
-- **Áudio**: vídeo só animado vai sem trilha até o Jailson fornecer uma trilha instrumental livre de direitos
-  (aí usar `--trilha arquivo.mp3`). Sugerir no resumo, quando fizer sentido, que ele acrescente uma música pelo
-  app depois (não é possível pela API).
+- **Áudio (decisão do Jailson, 15/11/2026)**: todo vídeo leva trilha instrumental alinhada à persona da marca
+  (segura, amigável, confiante, cordial). Usar as trilhas PRÓPRIAS em `gerador/video/trilhas/` (sintetizadas por
+  `gerar_trilhas.py`, sem obra de terceiros – livres de direitos), com `--trilha <nome>`:
+  - `confianca` – placar, resultados, acordo fechado (padrão);
+  - `conquista` – marcos, mosaico, "Números do mês";
+  - `reflexao` – educativo (título executivo, garantias, inadimplência);
+  - `dialogo` – fundo do vídeo do Jailson falando (entra a 15%, sob a voz).
+  Alternar para não repetir a mesma trilha em vídeos seguidos; registrar no post.json `"trilha"`. Nunca usar
+  música baixada da internet nem da biblioteca do Instagram/YouTube. Novas trilhas: acrescentar em
+  `gerar_trilhas.py` (outra progressão/andamento) mantendo a persona.
 - **Frequência**: 1 vídeo a cada 15 dias no rodízio (conta como publicação de feed da semana); vídeo do Jailson
   entra assim que chegar na ENTRADA, com prioridade.
 - **LinkedIn**: o mesmo MP4 publicado na Página da Justo Acordo e compartilhado no perfil do Jailson (manual,
