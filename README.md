@@ -27,7 +27,7 @@ Settings → Secrets and variables → Actions
 | Variable | `FB_PAGE_ID` | ID da Página Justo Acordo (61596452316521) |
 
 Sem `META_TOKEN`, roda em **modo simulação** (não publica, só testa a fila e as artes).
-Sem `FILA_ID`, para com erro – não há fila padrão (para nunca ler a fila da Advocacia Soares).
+Sem `FILA_ID`, não publica nada – não há fila padrão (para nunca ler a fila da Advocacia Soares).
 
 ## Pastas
 
