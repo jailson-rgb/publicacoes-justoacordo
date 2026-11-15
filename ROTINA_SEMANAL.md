@@ -11,8 +11,8 @@ Também serve de guia para pedidos avulsos.
     Nunca escrever em L (APROVAR), M (OBSERVAÇÕES), N (STATUS), P1 ("APROVAR TUDO ATÉ", vale para as duas marcas)
     nem Q (MARCA – fórmula).
   - aba **POS ACORDO (CLIENTES)** – fonte dos números (só leitura). Nunca mexer em nenhuma outra aba.
-- Drive "PUBLICAÇÕES JUSTO ACORDO": 01 ENTRADA (fotos de termos e conteúdos do Jailson/Mariana),
-  02 POSTS GERADOS (artes), 03 PLACAR (snapshots semanais – nunca no GitHub), 04 Cartões e Perfis.
+- Drive "PUBLICAÇÕES JUSTO ACORDO" (1BxqMnNDjnLbacZJ5_rGfoQLel35Xpnsc): 01 ENTRADA (1EOfZa3Yj8L14jSHDBBrmJF8LuGrux6CL) (fotos de termos e conteúdos do Jailson/Mariana),
+  02 POSTS GERADOS (19Bwb-pF0hQ0ZfJxfAybgFj1d6banPcvO), 03 PLACAR (1_FglkBHLmviv_0q4CC4_z9y_Dfelc8jz) (snapshots semanais – nunca no GitHub), 04 Cartões e Perfis.
 - Renderizador: `gerador/render.py`; placar: `gerador/placar.py`.
 
 ## Público e tom
@@ -75,7 +75,10 @@ Também serve de guia para pedidos avulsos.
 1. Ler a aba PUBLICAÇÕES (último ID no formato JA2026-NNN).
 2. Rodar o placar; ver acordos novos extrajudiciais e fotos na pasta ENTRADA.
 3. Escrever o JSON de cada post e renderizar (`python gerador/render.py post.json saida/`).
-4. Enviar os PNG para "02 POSTS GERADOS" (`<ID>-01.png`...).
+4. Converter as artes para JPEG e versionar em `rascunhos/<ID>/01.jpg, 02.jpg...` (com o `post.json`); na coluna ARQUIVOS
+   usar `repo:rascunhos/<ID>/01.jpg,repo:rascunhos/<ID>/02.jpg...` e em PRÉVIA o link da pasta no GitHub.
+   (Atenção: o repositório é público – rascunhos ficam visíveis antes da aprovação; nunca colocar ali dado de devedor/credor.)
+   Cópia opcional no Drive "02 POSTS GERADOS" (1SAJ5nG8yN9r5r2Q9nOmdXLxKU9ma3Kl7 é a pasta do JA2026-001).
 5. Acrescentar uma linha por post no fim da aba PUBLICAÇÕES (A–K), sempre com ID JA2026-NNN.
 6. Resumo curto para o Jailson: posts, datas, alertas e o placar da semana (com e sem publicação).
 
