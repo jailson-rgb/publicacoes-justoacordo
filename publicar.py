@@ -217,7 +217,8 @@ def descobrir_ids():
 def main():
     descobrir_ids()
     if not FILA_ID:
-        sys.exit("FILA_ID não configurado.")
+        log("FILA_ID ainda não configurado (Settings > Variables): nada a publicar.")
+        return
     agora = datetime.now(TZ)
     erros = []
     status = ler_status()
