@@ -23,11 +23,12 @@ Também serve de guia para pedidos avulsos.
 
 ## Grade (horário de Brasília)
 - Segunda 12:00 – story **Placar** (acumulado) ou **Nesta semana** (se passar no piso, ver abaixo).
-- Terça 12:00 – carrossel (estatística de crédito/inadimplência ou educativo sobre recuperação extrajudicial).
-- Quinta 12:00 – carrossel (conteúdo do Jailson da pasta ENTRADA ou tema educativo).
+- Terça 12:00 – **publicação de feed nº 1** (estatística de crédito/inadimplência ou educativo).
+- Quinta 12:00 – **publicação de feed nº 2** (conteúdo do Jailson da pasta ENTRADA ou tema educativo).
 - **Acordo fechado** – 1 a 2 stories por semana quando houver acordo novo extrajudicial (terça a sexta, 09:00).
-- 1ª semana do mês: o carrossel de terça vira **"Números do mês"**.
+- 1ª semana do mês: a publicação de terça vira **"Números do mês"** (layout `resultado` ou `barras`, em post único ou carrossel curto).
 - DESTINO padrão: "Instagram + Facebook".
+- As publicações de feed NÃO são sempre carrossel: ver "Variação de formato" abaixo.
 
 ## Números (regras aprovadas pelo Jailson em 15/11/2026)
 1. Exportar a aba POS ACORDO para CSV e rodar
@@ -64,17 +65,45 @@ Também serve de guia para pedidos avulsos.
 ## Sigilo do know-how
 - Não revelar método, ferramentas de pesquisa patrimonial, critérios de seleção de casos, roteiros de negociação.
 
-## Formato
-- Carrossel: 4 a 7 lâminas (`capa`, `numero`/`topico`, `fechamento`). Story: 1 lâmina (`placar`, `semana`,
-  `acordo`, `story_numero`, `story`). Exemplos em `gerador/exemplos/`.
-- Legenda: 400–900 caracteres, parágrafos curtos, 3–6 hashtags (#recuperacaodecredito #cobrancaextrajudicial
-  #inadimplencia #negociacao #mediacao), terminar com "Justo Acordo · Mediação extrajudicial entre empresas ·
-  justoacordo.com.br".
+## Variação de formato (pedido do Jailson, 15/11/2026)
+O feed não pode parecer sempre o mesmo carrossel. Variar o FORMATO (uma lâmina x várias) e o LAYOUT (estrutura visual).
+
+**Formatos de feed** (coluna TIPO):
+- **Post único** – uma lâmina só (1080x1350). Bom para frase de impacto, um número forte, pergunta e resposta, mito x verdade, resultado do mês.
+- **Carrossel curto** – 3 lâminas.
+- **Carrossel longo** – 5 a 7 lâminas (conteúdo educativo que pede passo a passo).
+
+**Layouts disponíveis** (`gerador/render.py`; exemplo de todos em `gerador/exemplos/exemplo-formatos.json`):
+- clássicos de carrossel: `capa`, `topico`, `numero`, `fechamento`;
+- variados (servem para post único e para montar carrosséis diferentes): `frase`, `dado`, `mito`, `comparativo`,
+  `checklist`, `passos`, `pergunta`, `barras`, `resultado`.
+- Vários aceitam `"fundo": "terra" | "areia" | "rosa"` – alternar o fundo também conta como variação.
+
+**Regras de rodízio**
+1. Antes de criar, ler os `post.json` de `rascunhos/` das **últimas 3 semanas** (campo `"formato"` e os layouts usados).
+2. Por semana, as duas publicações de feed têm de ser de **formatos diferentes** (ex.: um post único + um carrossel).
+3. Pelo menos **1 post único por semana**, e no máximo 1 carrossel longo por semana.
+4. Não repetir a mesma "receita" (formato + layout principal) em semanas seguidas; o mesmo layout principal só
+   volta depois de 2 semanas.
+5. Carrossel não precisa começar sempre com `capa` nem terminar com `fechamento`: pode abrir com `pergunta`,
+   `dado` ou `mito`, e fechar com `checklist` ou `frase`.
+6. Escolher o layout pelo conteúdo: número forte → `dado`/`resultado`; série histórica → `barras`; crença comum →
+   `mito`; antes x depois → `comparativo`; lista prática → `checklist`; processo → `passos`; dúvida → `pergunta`.
+7. `barras` só com dados reais e fonte citada (Serasa, Banco Central ou a aba POS ACORDO agregada por mês).
+8. Gravar no `post.json` o campo `"formato"` (ex.: `"post único · dado"`, `"carrossel curto · mito+passos"`),
+   para o rodízio da semana seguinte.
+
+**Stories**: 1 lâmina (`placar`, `semana`, `acordo`, `story_numero`, `story`). Alternar entre `story_numero` e
+`story` nas semanas em que não houver acordo novo.
+
+**Legenda**: 400–900 caracteres (post único pode ter legenda mais curta, 250–500), parágrafos curtos, 3–6 hashtags
+(#recuperacaodecredito #cobrancaextrajudicial #inadimplencia #negociacao #mediacao), terminar com "Justo Acordo ·
+Mediação extrajudicial entre empresas · justoacordo.com.br".
 
 ## Passo a passo
 1. Ler a aba PUBLICAÇÕES (último ID no formato JA2026-NNN).
 2. Rodar o placar; ver acordos novos extrajudiciais e fotos na pasta ENTRADA.
-3. Escrever o JSON de cada post e renderizar (`python gerador/render.py post.json saida/`).
+3. Conferir o rodízio (seção "Variação de formato"), escrever o JSON de cada post e renderizar (`python gerador/render.py post.json saida/`).
 4. Converter as artes para JPEG e versionar em `rascunhos/<ID>/01.jpg, 02.jpg...` (com o `post.json`); na coluna ARQUIVOS
    usar `repo:rascunhos/<ID>/01.jpg,repo:rascunhos/<ID>/02.jpg...` e em PRÉVIA o link da pasta no GitHub.
    (Atenção: o repositório é público – rascunhos ficam visíveis antes da aprovação; nunca colocar ali dado de devedor/credor.)

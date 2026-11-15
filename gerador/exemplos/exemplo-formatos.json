@@ -1,0 +1,11 @@
+{"id":"EXEMPLO-FORMATOS","tipo":"Carrossel","laminas":[
+{"layout":"frase","frase":"Dívida parada não é prejuízo certo. É crédito esperando a conversa certa.","assinatura":"Justo Acordo"},
+{"layout":"dado","chamada":"Placar Justo Acordo","numero":"R$ 1,6 mi","titulo":"já voltaram ao caixa das empresas clientes","texto":"Só contamos o que foi efetivamente recebido."},
+{"layout":"mito","mito":"Se o cliente não pagou até agora, não paga mais.","verdade":"Boa parte dos devedores quer resolver, mas precisa de uma proposta possível e de alguém que conduza a conversa com método."},
+{"layout":"comparativo","titulo":"Duas formas de lidar com o mesmo crédito","esquerda":"Esperar","itens_esquerda":["A dívida envelhece","O devedor prioriza outros credores","O caixa segue desfalcado"],"direita":"Negociar","itens_direita":["Contato rápido e profissional","Proposta que cabe no bolso de quem deve","Dinheiro de volta ao caixa"]},
+{"layout":"checklist","titulo":"Antes de dar um crédito como perdido, confira:","itens":["Você tem a nota fiscal e o comprovante de entrega?","O devedor ainda está em atividade?","Já houve uma proposta de acordo de verdade?"],"fundo":"terra"},
+{"layout":"passos","titulo":"Como funciona a cobrança extrajudicial","passos":[{"titulo":"Você envia o devedor","texto":"Com as notas e os contatos que tiver."},{"titulo":"Nós conduzimos a conversa","texto":"Com cordialidade e firmeza."},{"titulo":"O acordo é formalizado","texto":"Em termo assinado pelas partes."},{"titulo":"O dinheiro volta ao caixa","texto":"E só então recebemos."}]},
+{"layout":"pergunta","pergunta":"Vale a pena cobrar uma dívida pequena?","resposta":"Vale. Na cobrança extrajudicial 100% no êxito, a sua empresa não tem custo se o devedor não pagar."},
+{"layout":"barras","chamada":"Exemplo de gráfico","titulo":"Valores restituídos por mês","dados":[{"rotulo":"jun","valor":3,"texto":"—"},{"rotulo":"jul","valor":4,"texto":"—"},{"rotulo":"ago","valor":3.5,"texto":"—"},{"rotulo":"set","valor":5,"texto":"—"},{"rotulo":"out","valor":6,"texto":"—"}],"fonte":"ilustrativo (dados reais virão da aba POS ACORDO)"},
+{"layout":"resultado","chamada":"Placar acumulado","valor":"R$ 1,6","sufixo":"milhão","acordos":"210","empresas":"20"}
+]}

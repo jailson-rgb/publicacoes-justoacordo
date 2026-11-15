@@ -1,7 +1,42 @@
-{"id":"JA2026-001","tipo":"Carrossel","laminas":[
-{"layout":"capa","tema":"Apresentação","titulo":"Sua empresa tem valores a receber?","subtitulo":"Conheça a Justo Acordo: mediação extrajudicial entre empresas."},
-{"layout":"topico","numero":"1","titulo":"Antes do processo, o diálogo","texto":"Negociamos diretamente com o devedor, com técnica e respeito, sem depender do Judiciário. O que levaria anos pode se resolver em semanas."},
-{"layout":"topico","numero":"2","titulo":"Acordo formalizado e acompanhado","texto":"O acordo é assinado eletronicamente, e acompanhamos cada parcela até a quitação. Sua empresa sabe, em cada etapa, onde está o caso."},
-{"layout":"numero","numero":"R$ 1,6 milhão","titulo":"já voltaram ao caixa das empresas clientes","texto":"Em mais de 200 acordos extrajudiciais, para indústrias, comércio, serviços e agronegócio."},
-{"layout":"topico","numero":"3","titulo":"Cobrança extrajudicial 100% no êxito","texto":"Só recebemos quando o devedor paga. Sem custo antecipado para a sua empresa."},
-{"layout":"fechamento","titulo":"Antes de pensar em processo, pense em um justo acordo.","texto":"Fale com a nossa equipe: (51) 98975-1608 · justoacordo.com.br"}]}
+{
+ "id": "JA2026-001",
+ "tipo": "Carrossel",
+ "laminas": [
+  {
+   "layout": "capa",
+   "tema": "Apresentação",
+   "titulo": "Sua empresa tem valores a receber?",
+   "subtitulo": "Conheça a Justo Acordo: mediação extrajudicial entre empresas."
+  },
+  {
+   "layout": "topico",
+   "numero": "1",
+   "titulo": "Antes do processo, o diálogo",
+   "texto": "Negociamos diretamente com o devedor, com técnica e respeito, sem depender do Judiciário. O que levaria anos pode se resolver em semanas."
+  },
+  {
+   "layout": "topico",
+   "numero": "2",
+   "titulo": "Acordo formalizado e acompanhado",
+   "texto": "O acordo é assinado eletronicamente, e acompanhamos cada parcela até a quitação. Sua empresa sabe, em cada etapa, onde está o caso."
+  },
+  {
+   "layout": "numero",
+   "numero": "R$ 1,6 milhão",
+   "titulo": "já voltaram ao caixa das empresas clientes",
+   "texto": "Em mais de 200 acordos extrajudiciais, para indústrias, comércio, serviços e agronegócio."
+  },
+  {
+   "layout": "topico",
+   "numero": "3",
+   "titulo": "Cobrança extrajudicial 100% no êxito",
+   "texto": "Só recebemos quando o devedor paga. Sem custo antecipado para a sua empresa."
+  },
+  {
+   "layout": "fechamento",
+   "titulo": "Antes de pensar em processo, pense em um justo acordo.",
+   "texto": "Fale com a nossa equipe: (51) 98975-1608 · justoacordo.com.br"
+  }
+ ],
+ "formato": "carrossel longo · capa+numero+topico+fechamento"
+}
