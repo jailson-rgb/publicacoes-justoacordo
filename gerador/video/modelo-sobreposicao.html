@@ -1,0 +1,83 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+/* MODELO DE SOBREPOSIÇÃO (Justo Acordo): gráficos animados por cima do vídeo gravado pelo Jailson.
+   Uso: python gerador/video/animar.py gerador/video/modelo-sobreposicao.html saida.mp4 --sobre video.mp4
+   - Fundo transparente: aparece o vídeo dele por baixo.
+   - Área livre no centro (rosto): os gráficos ficam no terço de cima (y 220–760) e no terço de baixo (y 1320–1760).
+   - Trocar os textos marcados com TROCAR e ajustar os tempos (animation-delay) ao que ele fala.
+   - O encerramento entra sozinho nos 3 s finais (--fim é preenchido pelo animar.py). */
+@font-face{font-family:Cabin;font-weight:400;src:url('../fonts/cabin-latin-400-normal.woff2')}
+@font-face{font-family:Cabin;font-weight:600;src:url('../fonts/cabin-latin-600-normal.woff2')}
+@font-face{font-family:Cabin;font-weight:700;src:url('../fonts/cabin-latin-700-normal.woff2')}
+@font-face{font-family:Corm;font-weight:600;src:url('../fonts/cormorant-garamond-latin-600-normal.woff2')}
+:root{--terra:#A45248;--verde:#1C4220;--areia:#F7F1EC;--rosa:#EACBBB;--rosa2:#CA9A8E;--ink:#3B2F2C;--fim:12s}
+html,body{margin:0;background:#6b6461}
+#r{width:1080px;height:1920px;position:relative;overflow:hidden;font-family:Cabin,sans-serif;font-variant-numeric:lining-nums}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes out{to{opacity:0;transform:translateY(-30px)}}
+@keyframes outL{to{opacity:0;transform:translateX(-80px)}}
+@keyframes inL{from{opacity:0;transform:translateX(-120px)}to{opacity:1;transform:none}}
+@keyframes up{from{opacity:0;transform:translateY(70px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
+@keyframes line{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes wipe{from{clip-path:circle(0% at 50% 100%)}to{clip-path:circle(150% at 50% 100%)}}
+@keyframes roll{from{transform:translateY(0)}}
+
+/* selo da marca no topo (fica o vídeo todo) */
+.marca{position:absolute;left:60px;top:90px;padding:20px 30px;border-radius:26px;background:rgba(164,82,72,.92);animation:fade .6s .3s both}
+.marca img{display:block;width:240px}
+
+/* 1) nome do Jailson (terço de baixo) – 0,6 s a 4,5 s */
+.nome{position:absolute;left:60px;top:1450px;display:flex;align-items:stretch;animation:inL .7s .6s cubic-bezier(.2,.8,.2,1) both, outL .5s 4.5s both}
+.nome .barra{width:14px;background:var(--rosa);border-radius:8px 0 0 8px}
+.nome .txt{background:var(--areia);padding:26px 40px;border-radius:0 18px 18px 0}
+.nome p{margin:0}
+.nome .n{font-size:52px;font-weight:700;color:var(--terra)}
+.nome .c{font-size:30px;color:var(--ink);margin-top:4px}
+
+/* 2) número em destaque (terço de cima) – 5 s a 9,5 s */
+.dado{position:absolute;left:60px;right:60px;top:260px;background:var(--areia);border-radius:34px;padding:40px 50px;color:var(--ink);
+  animation:up .7s 5s cubic-bezier(.2,.8,.2,1) both, out .5s 9.5s both}
+.dado .k{margin:0;font-size:28px;font-weight:700;letter-spacing:6px;color:var(--verde)}
+.valor{display:flex;align-items:flex-end;font-family:Corm;font-weight:600;font-size:170px;line-height:1;color:var(--terra);margin-top:10px}
+.d{display:inline-block;height:170px;overflow:hidden}
+.d span{display:flex;flex-direction:column;animation:roll 1.8s 5.2s cubic-bezier(.15,.85,.25,1) both}
+.d span b{display:block;height:170px;font-weight:600}
+.d1 span{transform:translateY(-170px)}   /* TROCAR: -170px x dígito */
+.d2 span{transform:translateY(-1020px)}  /* TROCAR: -170px x dígito */
+.dado .s{font-family:Corm;font-weight:600;font-size:90px;color:var(--terra);margin-left:18px;padding-bottom:12px}
+.dado .t{margin:10px 0 0;font-size:36px;line-height:1.3}
+
+/* 3) palavras-chave (terço de baixo) – entram a partir de 10 s */
+.chips{position:absolute;left:60px;right:60px;top:1380px;display:flex;flex-direction:column;align-items:flex-start;gap:22px}
+.chip{padding:22px 34px;border-radius:999px;background:var(--terra);color:#fff;font-size:42px;font-weight:700;opacity:0;animation:pop .5s cubic-bezier(.3,1.6,.5,1) both}
+.chip:nth-child(1){animation-delay:10s}.chip:nth-child(2){animation-delay:10.6s;background:var(--verde)}
+.chip:nth-child(3){animation-delay:11.2s;background:var(--areia);color:var(--terra)}
+
+/* 4) encerramento – últimos 3 s */
+.fim{position:absolute;inset:0;background:var(--terra);color:#fff;animation:wipe .9s var(--fim) cubic-bezier(.6,0,.2,1) both}
+.fim img.l{position:absolute;left:96px;top:620px;width:520px;opacity:0;animation:fade .5s calc(var(--fim) + .5s) both}
+.fim .sl{position:absolute;left:96px;top:900px;width:880px;font-size:48px;line-height:1.35;opacity:0;animation:up .6s calc(var(--fim) + .8s) both}
+.fim .sl b{color:var(--rosa)}
+.fim .site{position:absolute;left:96px;bottom:200px;font-size:40px;font-weight:600;letter-spacing:2px;opacity:0;animation:fade .5s calc(var(--fim) + 1.2s) both}
+.fim .simb{position:absolute;right:-220px;top:900px;height:1300px;opacity:.14}
+</style></head><body>
+<div id="r">
+  <div class="marca"><img src="../assets/logo_branco.png"></div>
+
+  <div class="nome"><div class="barra"></div><div class="txt">
+    <p class="n">Jailson Soares</p><p class="c">Justo Acordo · Recuperação de crédito</p></div></div>   <!-- TROCAR -->
+
+  <div class="dado"><p class="k">PLACAR JUSTO ACORDO</p>   <!-- TROCAR -->
+    <div class="valor">R$&nbsp;<span class="d d1"><span><b>0</b><b>1</b><b>2</b><b>3</b><b>4</b><b>5</b><b>6</b><b>7</b><b>8</b><b>9</b></span></span>,<span class="d d2"><span><b>0</b><b>1</b><b>2</b><b>3</b><b>4</b><b>5</b><b>6</b><b>7</b><b>8</b><b>9</b></span></span><span class="s">milhão</span></div>
+    <p class="t">já voltaram ao caixa das empresas clientes.</p></div>   <!-- TROCAR -->
+
+  <div class="chips">   <!-- TROCAR -->
+    <div class="chip">Acordo vira título executivo</div>
+    <div class="chip">Garantia real ou pessoal</div>
+    <div class="chip">100% no êxito</div>
+  </div>
+
+  <div class="fim"><img class="simb" src="../assets/simb_terra.png"><img class="l" src="../assets/logo_branco.png">
+    <div class="sl">Cobrança extrajudicial <b>100% no êxito</b>: só recebemos quando o devedor paga.</div>
+    <div class="site">justoacordo.com.br</div></div>
+</div></body></html>

@@ -85,6 +85,35 @@ Também serve de guia para pedidos avulsos.
 6. **Bastidores e aprendizados** (layout `nota`) – sem caso identificável.
 - Cada mês deve passar por pelo menos 3 pilares diferentes; os pilares 2 e 3 entram pelo menos 1 vez por mês cada.
 
+## Vídeos (Reels) – aprovado pelo Jailson em 15/11/2026
+Dois tipos, ambos publicados automaticamente (TIPO "Reels" com o MP4 em ARQUIVOS, ex.: `repo:rascunhos/<ID>/video.mp4`).
+Reels SEM MP4 em ARQUIVOS (trend com áudio da biblioteca do Instagram) continuam "Manual" (Jailson publica pelo app).
+
+1. **Vídeo só animado** – modelos em `gerador/video/` (ex.: `modelo-placar.html`, placar com contador rolando).
+   `python gerador/video/animar.py gerador/video/<modelo>.html rascunhos/<ID>/video.mp4 10`
+   Variações: placar, "cobrança extrajudicial x judicial", "como funciona" (jornada), título executivo,
+   garantias. Criar modelo novo copiando a estrutura (CSS @keyframes + animation-delay, elemento #r 1080x1920),
+   sempre com a identidade da Justo Acordo. Duração 10 a 30 s; o último quadro tem a informação completa
+   (vira a capa automaticamente).
+2. **Vídeo do Jailson falando + intervenções ilustrativas** – ele grava (celular na vertical) e coloca o vídeo na
+   pasta 01 ENTRADA. A rotina:
+   - assiste/ouve o vídeo (ou usa a transcrição/anotação que vier junto) e marca os momentos-chave;
+   - copia `gerador/video/modelo-sobreposicao.html` para `rascunhos/<ID>/`, troca os textos (nome, número em
+     destaque, palavras-chave) e ajusta os tempos (animation-delay) às falas; gráficos só no terço de cima
+     (y 220–760) e no de baixo (y 1320–1760), para não cobrir o rosto;
+   - `python gerador/video/animar.py rascunhos/<ID>/modelo.html rascunhos/<ID>/video.mp4 --sobre <video do Jailson>`
+     (o áudio é o dele; o encerramento entra sozinho nos 3 s finais);
+   - vídeo bruto do Jailson NUNCA vai para o GitHub sem passar pela aprovação: só o MP4 final em `rascunhos/`.
+     Vídeos acima de 90 s ou de 100 MB: avisar no resumo (cortar ou publicar manualmente).
+- **Áudio**: vídeo só animado vai sem trilha até o Jailson fornecer uma trilha instrumental livre de direitos
+  (aí usar `--trilha arquivo.mp3`). Sugerir no resumo, quando fizer sentido, que ele acrescente uma música pelo
+  app depois (não é possível pela API).
+- **Frequência**: 1 vídeo a cada 15 dias no rodízio (conta como publicação de feed da semana); vídeo do Jailson
+  entra assim que chegar na ENTRADA, com prioridade.
+- **LinkedIn**: o mesmo MP4 publicado na Página da Justo Acordo e compartilhado no perfil do Jailson (manual,
+  pelo navegador, enquanto a API do LinkedIn não for liberada).
+- Legenda e regras de conteúdo iguais às dos outros posts (terminar com pergunta quando couber).
+
 ## Selo e argumento
 - "Cobrança extrajudicial **100% no êxito**: só recebemos quando o devedor paga." – vale só para a cobrança
   extrajudicial (o RVP/pré-processo é cobrado à parte; não generalizar).

@@ -118,6 +118,12 @@ def preparar_midia(post):
                 bruto = f.read()
         else:
             bruto = baixar(f"https://drive.google.com/uc?export=download&id={fid}")
+        if fid.lower().endswith(".mp4") or bruto[4:8] == b"ftyp":
+            p = os.path.join(pasta, f"{n:02d}.mp4")  # vídeo animado: vai como está
+            with open(p, "wb") as f:
+                f.write(bruto)
+            caminhos.append(p)
+            continue
         img = Image.open(io.BytesIO(bruto)).convert("RGB")
         p = os.path.join(pasta, f"{n:02d}.jpg")
         img.save(p, "JPEG", quality=92)
@@ -205,6 +211,65 @@ def facebook(tipo, urls, legenda):
         TOKEN = original
 
 
+# ---------------------------------------------------------------- vídeo (Reels)
+def aguardar_video(cid):
+    for _ in range(60):  # até ~10 min
+        st = api("GET", cid, fields="status_code,status").get("status_code")
+        if st == "FINISHED":
+            return
+        if st == "ERROR":
+            raise RuntimeError(f"vídeo {cid} recusado pelo Instagram: {api('GET', cid, fields='status').get('status')}")
+        time.sleep(10)
+    raise RuntimeError(f"vídeo {cid} não terminou de processar")
+
+
+def instagram_reels(caminho, legenda, capa_ms):
+    """Envia o MP4 direto (upload resumable), sem depender de endereço público."""
+    c = api("POST", f"{IG_USER_ID}/media", media_type="REELS", upload_type="resumable", caption=legenda,
+            share_to_feed="true", thumb_offset=str(capa_ms))["id"]
+    with open(caminho, "rb") as f:
+        dados = f.read()
+    req = urllib.request.Request(f"https://rupload.facebook.com/ig-api-upload/v21.0/{c}", data=dados, method="POST",
+                                 headers={"Authorization": f"OAuth {TOKEN}", "offset": "0", "file_size": str(len(dados))})
+    with urllib.request.urlopen(req, timeout=600) as r:
+        r.read()
+    aguardar_video(c)
+    return [api("POST", f"{IG_USER_ID}/media_publish", creation_id=c)["id"]]
+
+
+def facebook_video(caminho, legenda):
+    global TOKEN
+    original, TOKEN = TOKEN, page_token()
+    try:
+        fronteira = "----justoacordo" + str(int(time.time()))
+        with open(caminho, "rb") as f:
+            video = f.read()
+        partes = []
+        for k, v in (("access_token", TOKEN), ("description", legenda)):
+            partes.append(f'--{fronteira}\r\nContent-Disposition: form-data; name="{k}"\r\n\r\n{v}\r\n'.encode())
+        partes.append(f'--{fronteira}\r\nContent-Disposition: form-data; name="source"; filename="video.mp4"\r\n'
+                      f'Content-Type: video/mp4\r\n\r\n'.encode() + video + b"\r\n")
+        partes.append(f"--{fronteira}--\r\n".encode())
+        req = urllib.request.Request(f"https://graph-video.facebook.com/v21.0/{FB_PAGE_ID}/videos", data=b"".join(partes),
+                                     method="POST", headers={"Content-Type": f"multipart/form-data; boundary={fronteira}"})
+        try:
+            with urllib.request.urlopen(req, timeout=600) as r:
+                return [json.loads(r.read()).get("id", "?")]
+        except urllib.error.HTTPError as e:
+            raise RuntimeError(f"Meta API videos: {e.read().decode()[:400]}") from None
+    finally:
+        TOKEN = original
+
+
+def duracao_ms(caminho):
+    try:
+        out = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", caminho],
+                             capture_output=True, text=True).stdout.strip()
+        return int(float(out) * 1000)
+    except Exception:  # noqa: BLE001
+        return 10000  # sem ffprobe: capa aos 9,5 s (fim dos modelos de 10 s)
+
+
 # ---------------------------------------------------------------- principal
 def descobrir_ids():
     """Se IG_USER_ID / FB_PAGE_ID não foram configurados, descobre pelo token."""
@@ -262,8 +327,9 @@ def main():
                 mudou = True
             continue
         tipo = post.get("TIPO", "Carrossel")
-        if tipo == "Reels":
-            # Reels de trend usam áudio da biblioteca do Instagram: publicação manual pelo app
+        arquivos = post.get("ARQUIVOS (NÃO EDITAR)", post.get("ARQUIVOS", ""))
+        if tipo == "Reels" and ".mp4" not in arquivos.lower():
+            # Reels de trend (sem MP4 em ARQUIVOS) usam áudio da biblioteca do Instagram: publicação manual pelo app
             if ant[1] != "Manual":
                 status[pid] = [pid, "Manual", agora.strftime("%d/%m/%Y %H:%M"), "Publicar pelo app do celular (áudio da trend)", "0", ""]
                 mudou = True
@@ -280,6 +346,19 @@ def main():
                 raise RuntimeError("nenhuma imagem em ARQUIVOS")
             if SIMULACAO:
                 status[pid] = [pid, "Simulado", agora.strftime("%d/%m/%Y %H:%M"), f"{len(caminhos)} imagem(ns) prontas", "0", ""]
+                continue
+            if tipo == "Reels":
+                video = caminhos[0]
+                capa = max(duracao_ms(video) - 500, 0)  # capa = último quadro (informação completa)
+                if "Instagram" in destino and "IG" not in feito:
+                    det.append("IG " + ",".join(instagram_reels(video, legenda, capa)))
+                    feito += "IG"
+                    status[pid] = [pid, "Parcial", agora.strftime("%d/%m/%Y %H:%M"), " | ".join(det), str(tentativas), feito]
+                    gravar_status(status)
+                if "Facebook" in destino and "FB" not in feito:
+                    det.append("FB " + ",".join(facebook_video(video, legenda)))
+                    feito += "FB"
+                status[pid] = [pid, "Publicado", datetime.now(TZ).strftime("%d/%m/%Y %H:%M"), " | ".join(det), str(tentativas), feito]
                 continue
             urls = publicar_no_github(caminhos, pid)
             if "Instagram" in destino and "IG" not in feito:
