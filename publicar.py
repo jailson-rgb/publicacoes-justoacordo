@@ -36,6 +36,7 @@ MIDIA = "midia"
 
 TOKEN = os.environ.get("META_TOKEN", "").strip()
 FILA_ID = os.environ.get("FILA_ID", "").strip()  # sem padrão: nunca ler a fila da Advocacia Soares
+FILA_GID = os.environ.get("FILA_GID", "").strip()  # aba "JUSTO ACORDO" da planilha FILA APROVADA
 IG_USER_ID = os.environ.get("IG_USER_ID", "").strip()
 FB_PAGE_ID = os.environ.get("FB_PAGE_ID", "").strip()
 SIMULACAO = not TOKEN
@@ -59,7 +60,7 @@ def baixar(url, tentativas=3):
 
 
 def ler_fila():
-    url = f"https://docs.google.com/spreadsheets/d/{FILA_ID}/export?format=csv"
+    url = f"https://docs.google.com/spreadsheets/d/{FILA_ID}/export?format=csv" + (f"&gid={FILA_GID}" if FILA_GID else "")
     linhas = list(csv.reader(io.StringIO(baixar(url).decode("utf-8"))))
     if not linhas:
         return []
@@ -68,6 +69,8 @@ def ler_fila():
     for l in linhas[1:]:
         d = {cab[i]: (l[i].strip() if i < len(l) else "") for i in range(len(cab))}
         if d.get("ID"):
+            if not d["ID"].upper().startswith("JA"):
+                continue  # segurança: só posts da Justo Acordo (IDs JA...)
             out.append(d)
     return out
 
@@ -216,8 +219,8 @@ def descobrir_ids():
 
 def main():
     descobrir_ids()
-    if not FILA_ID:
-        log("FILA_ID ainda não configurado (Settings > Variables): nada a publicar.")
+    if not FILA_ID or not FILA_GID:
+        log("FILA_ID / FILA_GID ainda não configurados (Settings > Variables): nada a publicar.")
         return
     agora = datetime.now(TZ)
     erros = []

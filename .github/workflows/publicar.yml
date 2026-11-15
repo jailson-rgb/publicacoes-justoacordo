@@ -30,6 +30,7 @@ jobs:
         env:
           META_TOKEN: ${{ secrets.META_TOKEN }}
           FILA_ID: ${{ vars.FILA_ID }}
+          FILA_GID: ${{ vars.FILA_GID }}
           IG_USER_ID: ${{ vars.IG_USER_ID }}
           FB_PAGE_ID: ${{ vars.FB_PAGE_ID }}
         run: python publicar.py

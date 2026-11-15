@@ -5,8 +5,11 @@ Também serve de guia para pedidos avulsos.
 
 ## Onde fica cada coisa
 - Planilha VISÃO GERAL - JASA – `1EWl4M45oD3UbPBsDdoY-8jIS3own-YmZ_ObeFQcF2hI`
-  - aba **PUBLICAÇÕES JA** (aprovação; mesmas colunas da aba PUBLICAÇÕES da Soares, A–N).
-    Nunca escrever nas colunas APROVAR, OBSERVAÇÕES DO JAILSON e STATUS, nem na célula "APROVAR TUDO ATÉ".
+  - aba **PUBLICAÇÕES** (aprovação) – a MESMA da Advocacia Soares. Posts da Justo Acordo usam ID **JA2026-NNN**
+    (é o prefixo "JA" que manda o post para o Instagram/Facebook da Justo Acordo; sem ele o post iria para a Soares).
+    Colunas A–K como na Soares (na coluna K, "ALERTA OAB", registrar alertas de autorização do cliente/sigilo).
+    Nunca escrever em L (APROVAR), M (OBSERVAÇÕES), N (STATUS), P1 ("APROVAR TUDO ATÉ", vale para as duas marcas)
+    nem Q (MARCA – fórmula).
   - aba **POS ACORDO (CLIENTES)** – fonte dos números (só leitura). Nunca mexer em nenhuma outra aba.
 - Drive "PUBLICAÇÕES JUSTO ACORDO": 01 ENTRADA (fotos de termos e conteúdos do Jailson/Mariana),
   02 POSTS GERADOS (artes), 03 PLACAR (snapshots semanais – nunca no GitHub), 04 Cartões e Perfis.
@@ -69,11 +72,11 @@ Também serve de guia para pedidos avulsos.
   justoacordo.com.br".
 
 ## Passo a passo
-1. Ler a aba PUBLICAÇÕES JA (último ID no formato JA2026-NNN).
+1. Ler a aba PUBLICAÇÕES (último ID no formato JA2026-NNN).
 2. Rodar o placar; ver acordos novos extrajudiciais e fotos na pasta ENTRADA.
 3. Escrever o JSON de cada post e renderizar (`python gerador/render.py post.json saida/`).
 4. Enviar os PNG para "02 POSTS GERADOS" (`<ID>-01.png`...).
-5. Acrescentar uma linha por post na aba PUBLICAÇÕES JA (A–K).
+5. Acrescentar uma linha por post no fim da aba PUBLICAÇÕES (A–K), sempre com ID JA2026-NNN.
 6. Resumo curto para o Jailson: posts, datas, alertas e o placar da semana (com e sem publicação).
 
 ## LinkedIn
