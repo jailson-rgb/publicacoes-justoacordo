@@ -14,7 +14,7 @@ Regras (aprovadas pelo Jailson em 15/11/2026):
 - Só dinheiro efetivamente recebido entra; valor apenas acordado não.
 - Semana entra no story "Nesta semana" só se líquido da semana >= PISO_SEMANA e novos acordos >= PISO_ACORDOS;
   caso contrário sai só o placar acumulado.
-- "Acordo fechado" só para acordos extrajudiciais (sem nº de processo).
+- Só acordos extrajudiciais (sem nº de processo) entram no placar e no "Acordo fechado".
 Saída: JSON no terminal (para a rotina), com os valores já formatados para as artes.
 """
 import csv
@@ -76,7 +76,8 @@ def main():
         i = args.index("--novo-snapshot")
         novo = args[i + 1]
         del args[i:i + 2]
-    pos = ler(args[0])
+    pos = [r for r in ler(args[0]) if not PROCESSO.search(r.get("MODALIDADE", "") + " " + r.get("SITUAÇÂO", r.get("SITUAÇÃO", "")))]
+    # só acordos extrajudiciais entram nos números divulgados (acordos em processo ficam fora)
     anterior = {}
     if len(args) > 1:
         with open(args[1], encoding="utf-8") as f:
