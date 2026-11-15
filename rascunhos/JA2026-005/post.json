@@ -1,0 +1,17 @@
+{
+ "id": "JA2026-005",
+ "tipo": "Carrossel",
+ "formato": "carrossel curto · pergunta+comparativo+frase",
+ "pilar": "Garantias",
+ "laminas": [
+  {"layout": "pergunta", "chamada": "Pergunta de empresário", "fundo": "areia",
+   "pergunta": "Por que pedir uma garantia no acordo?",
+   "resposta": "Porque acordo com garantia tem mais chance de ser cumprido. E, se não for, a sua empresa tem mais por onde receber."},
+  {"layout": "comparativo", "titulo": "Os dois tipos de garantia",
+   "esquerda": "Garantia real", "itens_esquerda": ["Um bem fica vinculado à dívida.", "Exemplos: hipoteca, alienação fiduciária, penhor."],
+   "direita": "Garantia pessoal", "itens_direita": ["Outra pessoa responde junto com o devedor.", "Exemplos: aval, fiança de sócio."]},
+  {"layout": "frase", "fundo": "terra",
+   "frase": "Acordo bom é acordo com garantia.",
+   "assinatura": "Justo Acordo"}
+ ]
+}

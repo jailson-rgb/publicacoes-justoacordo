@@ -1,0 +1,11 @@
+{
+ "id": "JA2026-004",
+ "tipo": "Post único",
+ "formato": "post único · mito",
+ "pilar": "O acordo vira título executivo",
+ "laminas": [
+  {"layout": "mito",
+   "mito": "Se o devedor não cumprir o acordo, a empresa volta à estaca zero.",
+   "verdade": "O termo de acordo assinado pelo devedor e por duas testemunhas é título executivo extrajudicial (CPC, art. 784, III). Se houver descumprimento, o credor cobra o título diretamente, sem precisar discutir a dívida de novo."}
+ ]
+}
