@@ -112,7 +112,12 @@ def preparar_midia(post):
     os.makedirs(pasta, exist_ok=True)
     caminhos = []
     for n, fid in enumerate(ids, 1):
-        bruto = baixar(f"https://drive.google.com/uc?export=download&id={fid}")
+        if fid.startswith("repo:"):
+            # arte já versionada neste repositório (rascunhos/<ID>/NN.jpg)
+            with open(fid[5:], "rb") as f:
+                bruto = f.read()
+        else:
+            bruto = baixar(f"https://drive.google.com/uc?export=download&id={fid}")
         img = Image.open(io.BytesIO(bruto)).convert("RGB")
         p = os.path.join(pasta, f"{n:02d}.jpg")
         img.save(p, "JPEG", quality=92)
