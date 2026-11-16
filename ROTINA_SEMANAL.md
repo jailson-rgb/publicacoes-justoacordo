@@ -1,6 +1,6 @@
 # Rotina semanal de criação de posts – Justo Acordo
 
-Executada todo domingo às 18:43 pelo Claude (tarefa agendada). Lembrete de aprovação: segunda, 08:37.
+Executada todo domingo às 17:43 pelo Claude, na tarefa agendada única "MARKETING JASA – Posts da semana" (depois da Advocacia Soares, com resumo único). Não há lembrete de aprovação na segunda.
 Também serve de guia para pedidos avulsos.
 
 ## Onde fica cada coisa
