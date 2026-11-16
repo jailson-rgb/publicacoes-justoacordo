@@ -117,8 +117,7 @@ Reels SEM MP4 em ARQUIVOS (trend com áudio da biblioteca do Instagram) continua
   `gerar_trilhas.py` (outra progressão/andamento) mantendo a persona.
 - **Frequência**: 1 vídeo a cada 15 dias no rodízio (conta como publicação de feed da semana); vídeo do Jailson
   entra assim que chegar na ENTRADA, com prioridade.
-- **LinkedIn**: o mesmo MP4 publicado na Página da Justo Acordo e compartilhado no perfil do Jailson (manual,
-  pelo navegador, enquanto a API do LinkedIn não for liberada).
+- **LinkedIn**: vídeos NÃO vão para o LinkedIn (decisão do Jailson, 16/11/2026). Ver seção LinkedIn.
 - Legenda e regras de conteúdo iguais às dos outros posts (terminar com pergunta quando couber).
 
 ## Selo e argumento
@@ -199,6 +198,17 @@ Mediação extrajudicial entre empresas · justoacordo.com.br".
 5. Acrescentar uma linha por post no fim da aba PUBLICAÇÕES (A–K), sempre com ID JA2026-NNN.
 6. Resumo curto para o Jailson: posts, datas, alertas e o placar da semana (com e sem publicação).
 
-## LinkedIn
-- Publicar na Página Justo Acordo e depois compartilhar no perfil pessoal do Jailson ("Compartilhar com ideias",
-  frase curta dele). Sempre com legenda e hashtags; carrossel como PDF.
+## LinkedIn (decisão do Jailson, 16/11/2026: só mini artigos)
+- O LinkedIn da Justo Acordo recebe SOMENTE **mini artigos** em texto – rede mais profissional. Nada de vídeo/Reels,
+  stories, placar animado nem carrossel de Instagram.
+- Toda rodada de domingo: escrever **1 mini artigo por semana**, a partir do pilar mais "de gestor" da semana
+  (título executivo, garantias, inadimplência com dados, boas práticas do credor, aprendizados).
+  - 1.300 a 2.000 caracteres; título forte na 1ª linha; parágrafos de 1 a 3 frases; linguagem de diretor
+    financeiro/empresário; 1 ideia central + 1 exemplo prático genérico (sem caso identificável); fecho com pergunta
+    ao leitor; 3 a 5 hashtags; assinatura "Justo Acordo · Mediação extrajudicial entre empresas · justoacordo.com.br".
+  - Mesmas regras de conteúdo do Instagram (sem escritório/OAB, sem percentual de honorários, sem método/know-how,
+    números só agregados e com fonte).
+- O mini artigo NÃO entra na aba PUBLICAÇÕES (o publicador automático não posta no LinkedIn). Salvar em
+  `linkedin/AAAA-MM-DD.md` (data da segunda-feira da semana) e colar o texto completo no resumo de domingo, pronto
+  para o Jailson publicar na Página Justo Acordo e compartilhar no perfil pessoal ("Compartilhar com ideias", frase
+  curta dele). Sugerir o melhor dia: terça ou quarta, entre 8h e 10h.
