@@ -162,6 +162,16 @@ O feed não pode parecer sempre o mesmo carrossel. Variar o FORMATO (uma lâmina
    para o rodízio da semana seguinte.
 
 
+**Formatos novos (aprovados em 16/11/2026; catálogo no Drive: JUSTO ACORDO > IDENTIDADE VISUAL - SITE >
+"Formatos de posts – aprovados 16-11-2026"; exemplos em gerador/exemplos/exemplo-novos-16-11.json)** – os mesmos
+desenhos da Advocacia Soares, na identidade da Justo Acordo:
+- `foto` (equipe/bastidor + frase), `foto_fundo` (QUALQUER foto do Jailson em tela cheia com logo, @justo.acordo,
+  site e selo 100% no êxito nos cantos; legenda opcional), `lei` ("na lei": regra + "o que significa para o credor"),
+  `dicionario` (Dicionário do crédito, numerado), `serie` (quadro fixo, ex.: "Os 3 caminhos do credor").
+- Estruturas: `split`, `palavra`, `linha_tempo`, `grade` (2x2), `marcatexto`, `fluxo`, `moldura`, `ranking`.
+- Fotos: só as que o Jailson/Mariana mandarem para a 01 ENTRADA; nunca termo, documento, cliente ou devedor (o termo
+  continua só no story "acordo fechado", sempre desfocado). Post de foto a cada 15 dias, só quando houver foto nova.
+
 ### Formatos de tendência (pedido do Jailson, 15/11/2026)
 - **Mosaico na grade (3 posts = 1 imagem)** – layout largo `mosaico` (`gerador/exemplos/exemplo-mosaico.json`).
   Uso: no máximo **1 vez por mês**, para um marco forte (placar acumulado redondo, resultado do mês, campanha).
@@ -186,6 +196,18 @@ O feed não pode parecer sempre o mesmo carrossel. Variar o FORMATO (uma lâmina
 **Legenda**: 400–900 caracteres (post único pode ter legenda mais curta, 250–500), parágrafos curtos, 3–6 hashtags
 (#recuperacaodecredito #cobrancaextrajudicial #inadimplencia #negociacao #mediacao), terminar com "Justo Acordo ·
 Mediação extrajudicial entre empresas · justoacordo.com.br".
+
+## Intercalar com a Advocacia Soares (regra do Jailson, 16/11/2026)
+As duas marcas usam os MESMOS desenhos (cada uma na sua identidade). Para os perfis não parecerem iguais:
+1. Antes de escolher os layouts da semana, ver os da outra marca: as publicações da semana que está sendo criada
+   (na rodada única de domingo a Soares é feita primeiro) e as das 2 semanas anteriores – campo "formato"/layouts dos
+   post.json (Soares: `<ID>-post.json` na pasta 02 POSTS GERADOS da Soares; Justo Acordo: `rascunhos/<ID>/post.json`
+   do repositório publicacoes-justoacordo) e a coluna TIPO da aba PUBLICAÇÕES.
+2. No MESMO DIA, as duas marcas nunca publicam o mesmo layout principal nem o mesmo formato (ex.: se a Soares sai com
+   carrossel `passos` na terça, a Justo Acordo sai com post único ou outro layout).
+3. Na MESMA SEMANA, não repetir entre as marcas a mesma "receita" (formato + layout principal); mosaico, panorâmico e
+   post de foto: no máximo uma das marcas por semana.
+4. Gravar o "formato" no post.json (como já é feito) para a outra marca conseguir conferir.
 
 ## Passo a passo
 1. Ler a aba PUBLICAÇÕES (último ID no formato JA2026-NNN).

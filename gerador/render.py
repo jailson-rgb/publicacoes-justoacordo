@@ -453,6 +453,189 @@ def l_nota(l, n, total):
 LAYOUTS.update({"nota": l_nota})
 
 
+
+# ------------------------------------------------------------------ formatos novos (16/11/2026) – mesmos desenhos
+# da Advocacia Soares, na identidade da Justo Acordo (terra/areia/rosa, Cabin + Cormorant):
+# foto, foto_fundo, lei, dicionario, serie, split, palavra, linha_tempo, grade, marcatexto, fluxo, moldura, ranking.
+def moldura_ja(bg, claro, n, total, meio, extra="", txt=INK):
+    return caixa(bg, extra + f'<div style="position:absolute;inset:88px;display:flex;flex-direction:column;justify-content:space-between">'
+                 f'{topo_feed(n, total, "#fff" if claro else txt, claro)}{meio}{base_feed("#fff" if claro else txt, TERRA, claro)}</div>', 1350)
+
+
+def _img(img, estilo, rotulo="FOTO"):
+    if img and os.path.exists(img):
+        return f'<img src="file://{os.path.abspath(img)}" style="{estilo};object-fit:cover">'
+    return (f'<div style="{estilo};background:repeating-linear-gradient(135deg,{ROSA} 0 34px,#F0D9CD 34px 68px);display:flex;align-items:center;justify-content:center">'
+            f'<p style="margin:0;padding:14px 26px;background:rgba(247,241,236,.9);border-radius:12px;font-size:28px;font-weight:700;letter-spacing:3px;color:{TERRA}">{rotulo}</p></div>')
+
+
+def cham(t, cor=TERRA):
+    return f'<p style="margin:0 0 16px;font-size:26px;font-weight:700;letter-spacing:5px;color:{cor}">{e(t).upper()}</p>' if t else ""
+
+
+def l_foto(l, n, total):
+    """Foto da equipe/bastidor (01 ENTRADA) com frase. Nunca termo, documento ou pessoa de cliente/devedor."""
+    veu = f'<div style="position:absolute;left:0;right:0;bottom:0;height:60%;background:linear-gradient(180deg,rgba(164,82,72,0),rgba(164,82,72,.9) 45%,{TERRA})"></div>'
+    c = (_img(l.get("imagem"), "position:absolute;inset:0;width:100%;height:100%", "FOTO DA EQUIPE / BASTIDOR") + veu +
+         f'<div style="position:absolute;left:64px;top:64px;padding:20px 28px;background:rgba(164,82,72,.92);border-radius:18px">{logo(True, 250)}</div>'
+         f'<div style="position:absolute;left:88px;right:88px;bottom:88px;display:flex;flex-direction:column;gap:30px">'
+         f'<div style="width:110px;height:6px;background:{ROSA}"></div>'
+         f'<p style="margin:0;font-family:Corm;font-weight:600;font-size:{l.get("tamanho", 76)}px;line-height:1.05;color:#fff">{e(l.get("frase"))}</p>'
+         f'<div style="border-top:2px solid {ROSA};padding-top:22px;display:flex;justify-content:flex-end">{selo("#fff", ROSA, 22)}</div></div>')
+    return caixa(TERRA, c, 1350)
+
+
+def l_foto_fundo(l, n, total):
+    """Qualquer foto do Jailson em tela cheia, com a identificação nos 4 cantos (logo, @, site, selo) e filete rosa."""
+    c = (_img(l.get("imagem"), "position:absolute;inset:0;width:100%;height:100%", "FOTO") +
+         '<div style="position:absolute;left:0;right:0;top:0;height:300px;background:linear-gradient(180deg,rgba(60,30,26,.72),rgba(60,30,26,0))"></div>'
+         '<div style="position:absolute;left:0;right:0;bottom:0;height:380px;background:linear-gradient(0deg,rgba(60,30,26,.85),rgba(60,30,26,0))"></div>'
+         + (f'<div style="position:absolute;inset:36px;border:2px solid {ROSA};border-radius:6px"></div>' if l.get("filete", True) else "") +
+         (f'<p style="position:absolute;left:88px;right:88px;bottom:200px;margin:0;font-size:{l.get("tamanho", 42)}px;font-weight:700;line-height:1.2;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.45)">{e(l.get("legenda"))}</p>' if l.get("legenda") else "") +
+         f'<div style="position:absolute;left:84px;top:84px">{logo(True, 250)}</div>'
+         f'<p style="position:absolute;right:84px;top:100px;margin:0;font-size:27px;font-weight:600;color:#fff">@justo.acordo</p>'
+         f'<div style="position:absolute;left:84px;right:84px;bottom:84px;display:flex;justify-content:space-between;align-items:flex-end">'
+         f'<p style="margin:0;font-size:24px;font-weight:600;color:#fff">justoacordo.com.br</p>{selo("#fff", ROSA, 21)}</div>')
+    return caixa(TERRA, c, 1350)
+
+
+def l_lei(l, n, total):
+    """Na lei / no tribunal: regra no alto (terra) + "o que significa para o credor" (areia)."""
+    c = (f'<div style="position:absolute;left:0;right:0;top:0;height:770px;background:{TERRA};overflow:hidden">{simbolo(0.12, top=150, h=900)}'
+         f'<div style="position:absolute;left:88px;right:88px;top:88px;display:flex;justify-content:space-between;align-items:center">{logo(True, 250)}'
+         f'<p style="margin:0;padding:10px 24px;border:2px solid {ROSA};border-radius:999px;font-size:21px;font-weight:700;letter-spacing:3px;color:{ROSA}">{e(l.get("etiqueta", "NA LEI")).upper()}</p></div>'
+         f'<div style="position:absolute;left:88px;right:88px;top:230px;bottom:90px;display:flex;align-items:center;gap:34px">'
+         f'<div style="flex:none;align-self:stretch;width:8px;background:{ROSA}"></div><div>'
+         f'<p style="margin:0;font-family:Corm;font-weight:600;font-size:{l.get("tamanho", 74)}px;line-height:1.05;color:#fff">{e(l.get("regra"))}</p>'
+         f'<p style="margin:24px 0 0;font-size:26px;font-weight:600;color:{ROSA}">{e(l.get("referencia"))}</p></div></div></div>'
+         f'<div style="position:absolute;left:88px;right:88px;top:830px;bottom:88px;display:flex;flex-direction:column;justify-content:space-between">'
+         f'<div>{cham("O que significa para o credor", VERDE)}<p style="margin:0;font-size:34px;line-height:1.45;color:{INK}">{e(l.get("pratica"))}</p></div>'
+         f'{base_feed(INK, TERRA, False)}</div>')
+    return caixa(AREIA, c, 1350)
+
+
+def l_dicionario(l, n, total):
+    """Dicionário do crédito: um termo explicado em linguagem de empresário."""
+    meio = (f'<div>{cham("Dicionário do crédito · nº " + str(l.get("numero", "01")))}'
+            f'<p style="margin:0;font-family:Corm;font-weight:600;font-size:{l.get("tamanho", 96)}px;line-height:.98;color:{TERRA}">{e(l.get("termo"))}</p>'
+            f'<p style="margin:14px 0 0;font-size:28px;font-style:italic;color:{INK};opacity:.7">{e(l.get("classe", ""))}</p>'
+            f'<div style="width:110px;height:6px;background:{TERRA};margin:32px 0"></div>'
+            f'<p style="margin:0;font-size:35px;line-height:1.45;color:{INK}">{e(l.get("definicao"))}</p>'
+            f'<div style="margin-top:36px;background:#fff;border-radius:24px;padding:30px 36px">{cham("Na prática", VERDE)}'
+            f'<p style="margin:0;font-size:30px;line-height:1.42;color:{INK}">{e(l.get("pratica"))}</p></div></div>')
+    return moldura_ja(AREIA, False, n, total, meio, simbolo(0.06, top=-80, h=700))
+
+
+def l_serie(l, n, total):
+    """Quadro fixo de série (ex.: "Os 3 caminhos do credor"); "destaque" = coluna em terra."""
+    cols = l.get("colunas", [])
+    dst = l.get("destaque", -1)
+    cab = '<div style="width:170px"></div>' + "".join(
+        f'<div style="flex:1;background:{TERRA if i == dst else VERDE};border-radius:16px 16px 0 0;padding:20px 14px;text-align:center;font-size:25px;font-weight:700;line-height:1.15;color:#fff">{e(c)}</div>'
+        for i, c in enumerate(cols))
+    linhas = "".join(
+        f'<div style="display:flex;gap:10px;margin-top:10px"><div style="width:170px;padding:20px 0;font-size:22px;font-weight:700;letter-spacing:1px;color:{TERRA}">{e(r.get("rotulo")).upper()}</div>'
+        + "".join(f'<div style="flex:1;background:{"#F8E3D9" if i == dst else "#fff"};padding:20px 16px;font-size:24px;line-height:1.35;color:{INK}">{e(t)}</div>' for i, t in enumerate(r.get("itens", [])))
+        + '</div>' for r in l.get("linhas", []))
+    meio = (f'<div>{cham("Série · " + l.get("serie", "") + " · nº " + str(l.get("numero", "1")))}'
+            f'<p style="margin:0 0 40px;font-size:{l.get("tamanho", 52)}px;font-weight:700;line-height:1.12;color:{VERDE}">{e(l.get("titulo"))}</p>'
+            f'<div style="display:flex;gap:10px">{cab}</div>{linhas}<p style="margin:26px 0 0;font-size:22px;color:{INK};opacity:.7">{e(l.get("nota", ""))}</p></div>')
+    return moldura_ja(AREIA, False, n, total, meio)
+
+
+def l_split(l, n, total):
+    c = (f'<div style="position:absolute;left:0;top:0;width:540px;height:1350px;background:{TERRA};overflow:hidden">{simbolo(0.14, "esq", top=700, h=800)}'
+         f'<div style="position:absolute;left:70px;top:70px">{logo(True, 230)}</div>'
+         f'<div style="position:absolute;left:70px;right:56px;top:340px">{cham(l.get("chamada", ""), ROSA)}'
+         f'<p style="margin:0;font-family:Corm;font-weight:600;font-size:{l.get("tamanho", 76)}px;line-height:1.02;color:#fff">{e(l.get("titulo"))}</p></div></div>'
+         f'<div style="position:absolute;left:600px;right:80px;top:400px"><div style="width:90px;height:6px;background:{TERRA};margin-bottom:34px"></div>'
+         f'<p style="margin:0;font-size:34px;line-height:1.48;color:{INK}">{e(l.get("texto"))}</p></div>'
+         f'<div style="position:absolute;left:600px;right:80px;bottom:80px;border-top:2px solid {ROSA2};padding-top:20px">{selo(INK, TERRA, 20)}</div>')
+    return caixa(AREIA, c, 1350)
+
+
+def l_palavra(l, n, total):
+    bg, txt, dest, claro = cores(l, "terra")
+    meio = (f'<div><p data-fit="904" style="margin:0;white-space:nowrap;font-family:Corm;font-weight:600;font-size:{l.get("tamanho", 340)}px;line-height:.9;color:{ROSA if claro else TERRA}">{e(l.get("palavra"))}</p>'
+            f'<div style="width:120px;height:6px;background:{ROSA if claro else TERRA};margin:40px 0 34px"></div>'
+            f'<p style="margin:0;max-width:860px;font-size:46px;font-weight:600;line-height:1.3;color:{txt}">{e(l.get("frase"))}</p></div>')
+    return moldura_ja(bg, claro, n, total, meio, simbolo(0.1 if claro else 0.05, top=250, h=1150))
+
+
+def l_linha_tempo(l, n, total):
+    ms = l.get("marcos", [])
+    itens = ""
+    for i, m in enumerate(ms):
+        ult = i == len(ms) - 1
+        trilho = "" if ult else f'<div style="width:4px;flex:1;background:{ROSA2}"></div>'
+        itens += (f'<div style="display:flex;gap:30px"><div style="flex:none;width:180px;text-align:right;padding-top:2px;font-family:Corm;font-weight:600;font-size:40px;line-height:1;color:{TERRA}">{e(m.get("quando"))}</div>'
+                  f'<div style="flex:none;display:flex;flex-direction:column;align-items:center"><div style="width:34px;height:34px;border-radius:50%;margin-top:4px;background:{VERDE if ult else TERRA};border:5px solid {AREIA};box-shadow:0 0 0 3px {VERDE if ult else TERRA}"></div>{trilho}</div>'
+                  f'<div style="padding-bottom:40px"><p style="margin:0;font-size:36px;font-weight:700;color:{VERDE}">{e(m.get("titulo"))}</p>'
+                  f'<p style="margin:8px 0 0;font-size:28px;line-height:1.4;color:{INK}">{e(m.get("texto"))}</p></div></div>')
+    meio = f'<div>{cham(l.get("chamada", ""))}<p style="margin:0 0 50px;font-size:{l.get("tamanho", 56)}px;font-weight:700;line-height:1.1;color:{VERDE}">{e(l.get("titulo"))}</p>{itens}</div>'
+    return moldura_ja(AREIA, False, n, total, meio)
+
+
+def l_grade(l, n, total):
+    cards = ""
+    for i, b in enumerate(l.get("blocos", [])[:4]):
+        esc = i in (0, 3)
+        cards += (f'<div style="background:{TERRA if esc else "#fff"};border-radius:26px;padding:36px 34px;display:flex;flex-direction:column;gap:12px">'
+                  f'<p style="margin:0;font-family:Corm;font-weight:600;font-size:70px;line-height:.9;color:{ROSA if esc else TERRA}">{e(b.get("topo", f"{i+1:02d}"))}</p>'
+                  f'<p style="margin:0;font-size:34px;font-weight:700;line-height:1.15;color:{"#fff" if esc else VERDE}">{e(b.get("titulo"))}</p>'
+                  f'<p style="margin:0;font-size:26px;line-height:1.4;color:{"#fff" if esc else INK}">{e(b.get("texto"))}</p></div>')
+    meio = (f'<div><p style="margin:0 0 40px;font-size:{l.get("tamanho", 54)}px;font-weight:700;line-height:1.12;color:{VERDE}">{e(l.get("titulo"))}</p>'
+            f'<div style="display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:330px;gap:22px">{cards}</div></div>')
+    return moldura_ja(ROSA, False, n, total, meio)
+
+
+def l_marcatexto(l, n, total):
+    folha = (f'<div style="background:#fff;border-radius:6px;box-shadow:0 20px 50px rgba(59,47,44,.16);padding:60px 60px 66px;transform:rotate(-1.2deg)">'
+             f'<p style="margin:0 0 26px;font-size:24px;font-weight:700;letter-spacing:3px;color:{INK};opacity:.65">{e(l.get("cabecalho", ""))}</p>'
+             f'<p style="margin:0;font-family:Georgia,serif;font-size:40px;line-height:1.6;color:{INK}">{e(l.get("antes"))} '
+             f'<span style="background:linear-gradient(180deg,transparent 45%,rgba(234,203,187,.95) 45%);font-weight:700;color:{TERRA}">{e(l.get("grifo"))}</span> {e(l.get("depois"))}</p></div>')
+    nota = (f'<div style="display:flex;justify-content:flex-end;gap:14px;margin-top:34px;padding-right:20px">'
+            f'<svg width="80" height="70" viewBox="0 0 80 70"><path d="M70 64 C60 30 40 14 10 8 M10 8 L26 2 M10 8 L22 20" fill="none" stroke="{TERRA}" stroke-width="4" stroke-linecap="round"></path></svg>'
+            f'<p style="margin:20px 0 0;max-width:560px;font-size:32px;font-weight:700;line-height:1.3;color:{VERDE}">{e(l.get("nota"))}</p></div>')
+    return moldura_ja(AREIA, False, n, total, f'<div>{cham(l.get("chamada", ""))}<div style="height:24px"></div>{folha}{nota}</div>')
+
+
+def l_fluxo(l, n, total):
+    def box(t, bg, c, w="100%"):
+        return f'<div style="width:{w};box-sizing:border-box;background:{bg};border-radius:22px;padding:30px;font-size:32px;font-weight:700;line-height:1.25;color:{c};text-align:center">{e(t)}</div>'
+    seta = (f'<svg width="904" height="150" viewBox="0 0 904 150"><path d="M452 0 V40 M452 40 H226 V140 M452 40 H678 V140 M214 124 L226 144 L238 124 M666 124 L678 144 L690 124" fill="none" stroke="{TERRA}" stroke-width="4"></path>'
+            f'<rect x="150" y="62" width="150" height="44" rx="22" fill="{AREIA}" stroke="{TERRA}" stroke-width="2"></rect><text x="225" y="92" text-anchor="middle" font-family="Cabin" font-weight="700" font-size="24" fill="{TERRA}">{e(l.get("rot_sim", "Sim"))}</text>'
+            f'<rect x="603" y="62" width="150" height="44" rx="22" fill="{AREIA}" stroke="{TERRA}" stroke-width="2"></rect><text x="678" y="92" text-anchor="middle" font-family="Cabin" font-weight="700" font-size="24" fill="{TERRA}">{e(l.get("rot_nao", "Não"))}</text></svg>')
+    meio = (f'<div><p style="margin:0 0 44px;font-size:{l.get("tamanho", 56)}px;font-weight:700;line-height:1.12;color:{VERDE}">{e(l.get("titulo"))}</p>'
+            f'{box(l.get("pergunta"), TERRA, "#fff")}{seta}<div style="display:flex;gap:28px">{box(l.get("sim"), VERDE, "#fff", "50%")}{box(l.get("nao"), "#fff", INK, "50%")}</div></div>')
+    return moldura_ja(AREIA, False, n, total, meio)
+
+
+def l_moldura(l, n, total):
+    foto = (f'<div style="position:absolute;left:110px;top:200px;width:560px;background:#fff;padding:22px 22px 70px;box-shadow:0 22px 50px rgba(0,0,0,.25);transform:rotate(-3deg)">'
+            f'{_img(l.get("imagem"), "display:block;width:516px;height:600px")}'
+            f'<p style="margin:18px 0 0;font-family:Corm;font-style:italic;font-size:30px;color:{INK};text-align:center">{e(l.get("legenda", ""))}</p></div>')
+    c = (simbolo(0.12, top=150, h=1000) + f'<div style="position:absolute;right:88px;top:88px">{logo(True, 230)}</div>' + foto +
+         f'<div style="position:absolute;left:88px;right:88px;top:1000px"><p style="margin:0;font-family:Corm;font-weight:600;font-size:{l.get("tamanho", 62)}px;line-height:1.05;color:#fff">{e(l.get("titulo"))}</p>'
+         f'<p style="margin:14px 0 0;font-size:30px;line-height:1.4;color:#fff">{e(l.get("texto"))}</p></div>')
+    return caixa(TERRA, c, 1350)
+
+
+def l_ranking(l, n, total):
+    its = ""
+    for i, it in enumerate(l.get("itens", [])[:4], 1):
+        its += (f'<div style="display:flex;gap:34px;align-items:center;padding:24px 0;border-top:2px solid {ROSA2}">'
+                f'<p style="margin:0;flex:none;width:140px;font-family:Corm;font-weight:600;font-size:190px;line-height:.75;color:{TERRA if i == 1 else VERDE}">{i}</p>'
+                f'<div><p style="margin:0;font-size:38px;font-weight:700;line-height:1.15;color:{VERDE}">{e(it.get("titulo"))}</p>'
+                f'<p style="margin:8px 0 0;font-size:28px;line-height:1.4;color:{INK}">{e(it.get("texto"))}</p></div></div>')
+    meio = f'<div>{cham(l.get("chamada", ""))}<p style="margin:0 0 36px;font-size:{l.get("tamanho", 56)}px;font-weight:700;line-height:1.1;color:{VERDE}">{e(l.get("titulo"))}</p>{its}</div>'
+    return moldura_ja(AREIA, False, n, total, meio)
+
+
+LAYOUTS.update({"foto": l_foto, "foto_fundo": l_foto_fundo, "lei": l_lei, "dicionario": l_dicionario, "serie": l_serie,
+                "split": l_split, "palavra": l_palavra, "linha_tempo": l_linha_tempo, "grade": l_grade,
+                "marcatexto": l_marcatexto, "fluxo": l_fluxo, "moldura": l_moldura, "ranking": l_ranking})
+
 # ------------------------------------------------------------------ peças largas (cortadas em várias imagens)
 # 1) MOSAICO: 3 posts que formam uma imagem só na grade do perfil (tendência "puzzle feed").
 #    O perfil mostra cada post recortado em 3:4 (1012 px centrais de cada imagem 1080x1350): a arte larga
@@ -567,6 +750,9 @@ def renderizar(post, saida, chrome=None):
                 f.write(f'<!doctype html><html><head><meta charset="utf-8"><style>{fontcss()}</style></head><body>{corpo}</body></html>')
             pg.goto("file://" + os.path.abspath(tmp))
             pg.evaluate("document.fonts.ready.then(()=>1)")
+            pg.evaluate("""() => document.querySelectorAll('[data-fit]').forEach(el => {
+                const alvo = +el.dataset.fit, fs = parseFloat(getComputedStyle(el).fontSize);
+                if (el.scrollWidth > alvo) el.style.fontSize = (fs * alvo / el.scrollWidth) + 'px'; })""")
             pg.wait_for_timeout(200)
             p = os.path.join(saida, f"{i:02d}.png")
             pg.locator("#r").screenshot(path=p)

@@ -1,0 +1,174 @@
+{
+ "id": "EXEMPLOS-16-11",
+ "tipo": "Carrossel",
+ "_obs": "Um exemplo de cada formato aprovado em 16/11/2026.",
+ "laminas": [
+  {
+   "layout": "foto",
+   "frase": "Por trás de cada acordo, uma conversa bem conduzida."
+  },
+  {
+   "layout": "foto_fundo",
+   "imagem": "caminho/da/foto-da-01-ENTRADA.jpg"
+  },
+  {
+   "layout": "foto_fundo",
+   "imagem": "caminho/da/foto-da-01-ENTRADA.jpg",
+   "legenda": "Mais uma semana de negociações entre empresas."
+  },
+  {
+   "layout": "lei",
+   "regra": "Acordo assinado por duas testemunhas vale como título executivo.",
+   "referencia": "Código de Processo Civil, art. 784, III",
+   "pratica": "Se o devedor descumprir o acordo, a empresa credora não precisa provar a dívida de novo: pode cobrar direto pela execução."
+  },
+  {
+   "layout": "dicionario",
+   "numero": "01",
+   "termo": "Inadimplência",
+   "classe": "substantivo feminino",
+   "definicao": "Falta de pagamento de uma obrigação no prazo combinado.",
+   "pratica": "Uma duplicata vencida e não paga já é inadimplência, mesmo que o cliente prometa pagar \"semana que vem\"."
+  },
+  {
+   "layout": "serie",
+   "serie": "Os 3 caminhos do credor",
+   "numero": "1",
+   "titulo": "Cliente atrasou. E agora?",
+   "colunas": [
+    "Cobrança interna",
+    "Negociação extrajudicial",
+    "Ação judicial"
+   ],
+   "destaque": 1,
+   "linhas": [
+    {
+     "rotulo": "Quem conduz",
+     "itens": [
+      "A equipe da própria empresa",
+      "Mediador especializado",
+      "O Judiciário"
+     ]
+    },
+    {
+     "rotulo": "Relação",
+     "itens": [
+      "Desgasta com o tempo",
+      "Conversa entre empresas",
+      "Costuma encerrar a relação"
+     ]
+    },
+    {
+     "rotulo": "Custo",
+     "itens": [
+      "Tempo da equipe",
+      "100% no êxito: só paga quando recebe",
+      "Custas e prazo mais longo"
+     ]
+    }
+   ],
+   "nota": "Conteúdo informativo. Cada crédito tem o seu caminho."
+  },
+  {
+   "layout": "split",
+   "chamada": "Mediação entre empresas",
+   "titulo": "Dívida parada é ativo esperando conversa.",
+   "texto": "A Justo Acordo conduz a negociação entre credor e devedor com firmeza e cordialidade."
+  },
+  {
+   "layout": "palavra",
+   "palavra": "Acordo.",
+   "frase": "O caminho mais curto entre o atraso e o caixa."
+  },
+  {
+   "layout": "linha_tempo",
+   "chamada": "Como funciona",
+   "titulo": "Do atraso ao acordo",
+   "marcos": [
+    {
+     "quando": "01",
+     "titulo": "Você envia o devedor",
+     "texto": "Documentos e valor em aberto."
+    },
+    {
+     "quando": "02",
+     "titulo": "Primeiro contato",
+     "texto": "Conversa para entender a situação."
+    },
+    {
+     "quando": "03",
+     "titulo": "Acordo assinado",
+     "texto": "Termo com testemunhas e garantias."
+    },
+    {
+     "quando": "04",
+     "titulo": "Dinheiro no caixa",
+     "texto": "O valor volta para a empresa credora."
+    }
+   ]
+  },
+  {
+   "layout": "grade",
+   "titulo": "4 garantias que fortalecem um acordo",
+   "blocos": [
+    {
+     "titulo": "Aval",
+     "texto": "Um terceiro garante o título."
+    },
+    {
+     "titulo": "Fiança",
+     "texto": "Um fiador responde pela dívida."
+    },
+    {
+     "titulo": "Confissão de dívida",
+     "texto": "O devedor reconhece o valor."
+    },
+    {
+     "titulo": "Garantia real",
+     "texto": "Um bem fica vinculado ao pagamento."
+    }
+   ]
+  },
+  {
+   "layout": "marcatexto",
+   "chamada": "Leia com atenção",
+   "cabecalho": "CÓDIGO DE PROCESSO CIVIL · ART. 784, III",
+   "antes": "São títulos executivos extrajudiciais: (...) III – o documento particular",
+   "grifo": "assinado pelo devedor e por 2 (duas) testemunhas",
+   "depois": ";",
+   "nota": "Acordo bem feito já nasce com força de título."
+  },
+  {
+   "layout": "fluxo",
+   "titulo": "Hora de chamar um mediador?",
+   "pergunta": "O cliente atrasou mais de 30 dias?",
+   "sim": "Negociação extrajudicial",
+   "nao": "Lembrete da própria equipe"
+  },
+  {
+   "layout": "moldura",
+   "legenda": "Bastidores",
+   "titulo": "Toda negociação começa ouvindo.",
+   "texto": "Entender o devedor é o primeiro passo para um acordo que se cumpre."
+  },
+  {
+   "layout": "ranking",
+   "chamada": "Erros do credor",
+   "titulo": "O que mais atrasa o recebimento",
+   "itens": [
+    {
+     "titulo": "Esperar demais para agir",
+     "texto": "Quanto mais antiga a dívida, mais difícil receber."
+    },
+    {
+     "titulo": "Vender sem garantia",
+     "texto": "Sem aval ou fiança, sobra só o devedor."
+    },
+    {
+     "titulo": "Acordo de boca",
+     "texto": "Sem termo assinado, não há título."
+    }
+   ]
+  }
+ ]
+}
