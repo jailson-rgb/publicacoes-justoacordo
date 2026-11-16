@@ -101,12 +101,17 @@ Reels SEM MP4 em ARQUIVOS (trend com áudio da biblioteca do Instagram) continua
    - transcrição com tempos: o ambiente do Claude não baixa modelos de voz – usar a transcrição automática do Drive
      (vídeo na 01 ENTRADA, read_file_content), a legenda exportada do celular/CapCut ou o roteiro/tópicos do Jailson;
      sem nenhuma delas, pedir os tópicos e momentos-chave antes de montar;
+   - CORTES (pedido do Jailson, 16/11/2026: vídeo fluido): antes das ilustrações,
+     `python gerador/video/cortar.py bruto.mp4 cortado.mp4 [--cortar "0:42-0:45,..."]` – pausas longas saem
+     sozinhas (fica ~0,25 s de respiro); gaguejos, repetições e frases recomeçadas vão em --cortar (pela transcrição
+     com tempos ou pelos trechos que o Jailson indicar). O cortado.txt lista o que saiu e vai junto na aprovação.
+     Na dúvida, não cortar conteúdo; os tempos das ilustrações são marcados no vídeo JÁ cortado;
    - marca os momentos-chave e escolhe a ilustração de cada um (lei citada → cartão grifado; comparação → cartões;
      etapas → passos; número agregado/fonte → número animado; ideias → palavras-chave) + legendas da fala;
    - copia `gerador/video/modelo-sobreposicao.html` para `rascunhos/<ID>/`, troca os textos (nome, número em
      destaque, palavras-chave) e ajusta os tempos (animation-delay) às falas; gráficos só no terço de cima
      (y 220–760) e no de baixo (y 1320–1760), para não cobrir o rosto;
-   - `python gerador/video/animar.py rascunhos/<ID>/modelo.html rascunhos/<ID>/video.mp4 --sobre <video do Jailson>`
+   - `python gerador/video/animar.py rascunhos/<ID>/modelo.html rascunhos/<ID>/video.mp4 --sobre <video do Jailson já cortado>`
      (o áudio é o dele; o encerramento entra sozinho nos 3 s finais);
    - vídeo bruto do Jailson NUNCA vai para o GitHub sem passar pela aprovação: só o MP4 final em `rascunhos/`.
      Vídeos acima de 90 s ou de 100 MB: avisar no resumo (cortar ou publicar manualmente).
