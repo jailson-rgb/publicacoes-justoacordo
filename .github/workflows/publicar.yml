@@ -2,7 +2,7 @@ name: Publicar posts aprovados
 
 on:
   schedule:
-    - cron: "37 * * * *"  # de hora em hora (minuto 37, para não coincidir com a Soares)
+    - cron: "7,22,37,52 * * * *"  # a cada 15 min (o GitHub às vezes atrasa ou pula execuções agendadas)
   workflow_dispatch: {}     # botão "Run workflow" para publicar na hora
 
 permissions:
