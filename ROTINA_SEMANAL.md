@@ -97,7 +97,12 @@ Reels SEM MP4 em ARQUIVOS (trend com áudio da biblioteca do Instagram) continua
    (vira a capa automaticamente).
 2. **Vídeo do Jailson falando + intervenções ilustrativas** – ele grava (celular na vertical) e coloca o vídeo na
    pasta 01 ENTRADA. A rotina:
-   - assiste/ouve o vídeo (ou usa a transcrição/anotação que vier junto) e marca os momentos-chave;
+   - pode ser pedido avulso (vídeo mandado no chat): fazer na hora, sem esperar o domingo; objetivo: deixar DIDÁTICO;
+   - transcrição com tempos: o ambiente do Claude não baixa modelos de voz – usar a transcrição automática do Drive
+     (vídeo na 01 ENTRADA, read_file_content), a legenda exportada do celular/CapCut ou o roteiro/tópicos do Jailson;
+     sem nenhuma delas, pedir os tópicos e momentos-chave antes de montar;
+   - marca os momentos-chave e escolhe a ilustração de cada um (lei citada → cartão grifado; comparação → cartões;
+     etapas → passos; número agregado/fonte → número animado; ideias → palavras-chave) + legendas da fala;
    - copia `gerador/video/modelo-sobreposicao.html` para `rascunhos/<ID>/`, troca os textos (nome, número em
      destaque, palavras-chave) e ajusta os tempos (animation-delay) às falas; gráficos só no terço de cima
      (y 220–760) e no de baixo (y 1320–1760), para não cobrir o rosto;
