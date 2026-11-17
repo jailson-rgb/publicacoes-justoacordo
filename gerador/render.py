@@ -138,6 +138,28 @@ def l_acordo(l, n, total):
     return caixa(AREIA, c)
 
 
+def l_acordo_frase(l, n, total):
+    """Story de acordo recém-fechado (ainda sem valor recebido): termo desfocado + frase do Jailson."""
+    foto = l.get("foto")
+    topo = (f'<div style="position:absolute;left:150px;top:250px;width:780px;height:420px;background:#fff;border-radius:14px;'
+            f'box-shadow:0 30px 70px rgba(80,40,30,.18);transform:rotate(-4deg);overflow:hidden">'
+            f'<div style="position:absolute;inset:-20px;background:#fff url(\'file://{os.path.abspath(foto)}\') center/88% auto no-repeat;'
+            f'filter:blur(7px)"></div></div>') if foto else ""
+    seg = f'<p style="margin:0 0 30px;font-size:34px;font-weight:600;letter-spacing:2px;color:{TERRA}">{e(l["segmento"])}</p>' if l.get("segmento") else ""
+    c = f'''{topo}
+    <div style="position:absolute;top:120px;left:96px;padding:18px 34px;background:{TERRA};border-radius:999px;font-size:30px;font-weight:700;letter-spacing:5px;color:#fff;z-index:2">ACORDO FECHADO HOJE</div>
+    {simbolo(0.07)}
+    <div style="position:absolute;left:96px;right:96px;top:760px;bottom:140px;display:flex;flex-direction:column;justify-content:space-between">
+      <div>{seg}
+        {big(l.get("frase"), 150, TERRA, "line-height:1.02")}
+        <div style="width:150px;height:6px;background:{TERRA};margin:56px 0 40px"></div>
+        <p style="margin:0;font-size:42px;line-height:1.3;color:{INK}">{e(l.get("texto"))}</p>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end">{selo()}{logo(w=300)}</div>
+    </div>'''
+    return caixa(AREIA, c)
+
+
 def l_semana(l, n, total):
     c = f'''{simbolo(0.09, "esq")}
     <div style="position:absolute;inset:150px 96px 140px 96px;display:flex;flex-direction:column;justify-content:space-between">
@@ -245,7 +267,7 @@ def l_fechamento(l, n, total):
     return caixa(TERRA, c, 1350)
 
 
-LAYOUTS = {"placar": l_placar, "acordo": l_acordo, "semana": l_semana, "story_numero": l_story_numero, "story": l_story,
+LAYOUTS = {"placar": l_placar, "acordo": l_acordo, "acordo_frase": l_acordo_frase, "semana": l_semana, "story_numero": l_story_numero, "story": l_story,
            "capa": l_capa, "topico": l_topico, "numero": l_numero, "fechamento": l_fechamento}
 
 
