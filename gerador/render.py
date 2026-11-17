@@ -141,10 +141,21 @@ def l_acordo(l, n, total):
 def l_acordo_frase(l, n, total):
     """Story de acordo recém-fechado (ainda sem valor recebido): termo desfocado + frase do Jailson."""
     foto = l.get("foto")
-    topo = (f'<div style="position:absolute;left:150px;top:250px;width:780px;height:420px;background:#fff;border-radius:14px;'
-            f'box-shadow:0 30px 70px rgba(80,40,30,.18);transform:rotate(-4deg);overflow:hidden">'
-            f'<div style="position:absolute;inset:-20px;background:#fff url(\'file://{os.path.abspath(foto)}\') center/88% auto no-repeat;'
-            f'filter:blur(7px)"></div></div>') if foto else ""
+    if l.get("termo"):
+        # trecho do termo LEGÍVEL, com valores/nomes já trocados por [[...]] = tarja desfocada
+        import re as _re
+        txt = e(l["termo"])
+        txt = _re.sub(r"\[\[(.+?)\]\]", lambda m: f'<span style="filter:blur(9px);background:#d9cfc8;color:transparent;border-radius:6px;white-space:nowrap">{m.group(1)}</span>', txt)
+        txt = _re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", txt).replace("\n", "<br><br>")
+        topo = (f'<div style="position:absolute;left:120px;top:250px;width:840px;background:#fff;border-radius:14px;padding:46px 50px;'
+                f'box-shadow:0 30px 70px rgba(80,40,30,.18);transform:rotate(-3deg);font-size:25px;line-height:1.55;color:#3a3330;text-align:justify">{txt}</div>')
+    elif foto:
+        topo = (f'<div style="position:absolute;left:150px;top:250px;width:780px;height:420px;background:#fff;border-radius:14px;'
+                f'box-shadow:0 30px 70px rgba(80,40,30,.18);transform:rotate(-4deg);overflow:hidden">'
+                f'<div style="position:absolute;inset:-20px;background:#fff url(\'file://{os.path.abspath(foto)}\') center/88% auto no-repeat;'
+                f'filter:blur(7px)"></div></div>')
+    else:
+        topo = ""
     seg = f'<p style="margin:0 0 30px;font-size:34px;font-weight:600;letter-spacing:2px;color:{TERRA}">{e(l["segmento"])}</p>' if l.get("segmento") else ""
     c = f'''{topo}
     <div style="position:absolute;top:120px;left:96px;padding:18px 34px;background:{TERRA};border-radius:999px;font-size:30px;font-weight:700;letter-spacing:5px;color:#fff;z-index:2">ACORDO FECHADO HOJE</div>
