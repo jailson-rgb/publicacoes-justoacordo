@@ -52,6 +52,9 @@ Também serve de guia para pedidos avulsos.
 - Foto do termo (pasta ENTRADA) entra **sempre desfocada** pelo renderizador, como fundo. Nunca dado legível
   (nome, CPF/CNPJ, assinatura, valor) do devedor ou do credor.
 - Proibido: nome do devedor ou do credor, cidade, valor da dívida, percentual de honorários.
+- Exceção (Jailson, 17/11/2026): o trecho do TERMO pode aparecer legível, com os valores da dívida e do acordo,
+  quando o Jailson mandar o termo para o story. Ele avisa quando houver dado pessoal a ocultar (nome, CPF/CNPJ,
+  assinatura, endereço); nesse caso, tarjar só esse dado (`termo` com [[...]] no layout `acordo_frase`).
 
 ## Conteúdo do Jailson (pasta 01 ENTRADA) – tem prioridade sobre a pesquisa
 - O Jailson (ou a Mariana) coloca na pasta **01 ENTRADA** qualquer material: texto, anotação, áudio transcrito,
