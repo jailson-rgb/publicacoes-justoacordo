@@ -1,0 +1,12 @@
+{
+ "id": "EXEMPLO-acordo_frase",
+ "tipo": "Story",
+ "laminas": [
+  {
+   "layout": "acordo_frase",
+   "termo": "**CLÁUSULA PRIMEIRA — DO OBJETO:** Pelo presente instrumento particular e na melhor forma do direito, a SEGUNDA ACORDANTE confessa a dívida objeto do presente acordo em relação à PRIMEIRA ACORDANTE, dívida esta que é líquida, certa e exigível, no valor atualizado para a presente data de **R$ 34.529,88**, conforme memorial de cálculo em anexo. A natureza da dívida advém do negócio jurídico de compra e venda de produtos entre as partes.\n**Parágrafo Primeiro:** Para fins de adimplemento da obrigação, ficou acordado entre a PRIMEIRA e a SEGUNDA o pagamento do débito na monta de **R$ 43.200,00** a ser pago da seguinte forma:",
+   "frase": "Menos 1 processo judicial.",
+   "texto": "Credor e devedor chegaram a um acordo na conversa, sem precisar da Justiça."
+  }
+ ]
+}

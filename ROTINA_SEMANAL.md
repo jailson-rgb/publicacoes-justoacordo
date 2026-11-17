@@ -44,6 +44,14 @@ Também serve de guia para pedidos avulsos.
    em caso de dúvida, preencher ALERTA e explicar.
 
 ## Story "Acordo fechado"
+- Layouts: `acordo` (quando já há valor RECEBIDO: segmento, vencimento, forma, valor líquido) e **`acordo_frase`**
+  (APROVADO pelo Jailson em 17/11/2026 – modelo JA2026-015, exemplo em `gerador/exemplos/exemplo-acordo-frase.json`):
+  acordo recém-fechado, sem valor recebido. Etiqueta "ACORDO FECHADO HOJE", trecho do termo num cartão inclinado
+  (campo `termo`: legível; `**negrito**`; `[[...]]` = tarja desfocada só para dado pessoal que o Jailson mandar
+  ocultar; sem `termo`, usa a `foto` desfocada), frase grande do Jailson (`frase`, ex.: "Menos 1 processo judicial."),
+  linha de apoio (`texto`), selo e logo.
+- Menções em story: o publicador não põe o adesivo de menção (só o app do celular faz). Se houver contas a marcar,
+  avisar o Jailson no chat quando o story sair, com a lista dos @, para ele tocar em "Mencionar" no celular.
 - Só acordos **extrajudiciais** (sem número de processo) – acordo judicial nunca vira post.
 - Precisa de **autorização do cliente credor** (uma vez por cliente) – registrar em OBSERVAÇÕES/ALERTA se não houver.
 - Conteúdo: segmento genérico do credor + UF (ex.: "INDÚSTRIA DE ALIMENTOS · RS"); "Dívida vencida desde mm/aaaa"
