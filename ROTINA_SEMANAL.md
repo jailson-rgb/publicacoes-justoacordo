@@ -22,10 +22,19 @@ Também serve de guia para pedidos avulsos.
 - Tom do manual da marca: seguro, amigável, confiante, cordial – "sério sem ser rígido". Linguagem de empresário.
 
 ## Grade (horário de Brasília)
-- Segunda 12:00 – story **Placar** (acumulado) ou **Nesta semana** (se passar no piso, ver abaixo).
+- **STORY TODO DIA ÚTIL às 10:30** (decisão do Jailson, 18/11/2026: 1 story por dia para engajamento; horário
+  diferente dos stories da Soares, que saem seg 12h e ter–sex 09h). Rodízio:
+  - Segunda – **Placar** (acumulado) ou **Nesta semana** (se passar no piso, ver abaixo);
+  - Terça – **dica para o credor** (boas práticas de crédito e cobrança);
+  - Quarta – **mito x verdade** ou **você sabia?** (título executivo, prescrição, protesto, negociação);
+  - Quinta – **chamada para o feed** de quinta ou **garantias** no acordo;
+  - Sexta – **bastidores / pergunta** (enquete em texto, número do mercado com fonte e mês).
+  Variar os layouts de story (story, story_numero, acordo_frase, placar…) e não repetir o layout do story da Soares
+  do mesmo dia.
 - Terça 12:00 – **publicação de feed nº 1** (estatística de crédito/inadimplência ou educativo).
 - Quinta 12:00 – **publicação de feed nº 2** (conteúdo do Jailson da pasta ENTRADA ou tema educativo).
-- **Acordo fechado** – 1 a 2 stories por semana quando houver acordo novo extrajudicial (terça a sexta, 09:00).
+- **Acordo fechado** – story EXTRA (além do diário) quando houver acordo novo extrajudicial: na hora, se o Jailson
+  mandar no chat, ou às 16:00 do dia; 1 a 2 por semana.
 - 1ª semana do mês: a publicação de terça vira **"Números do mês"** (layout `resultado` ou `barras`, em post único ou carrossel curto).
 - DESTINO padrão: "Instagram + Facebook".
 - As publicações de feed NÃO são sempre carrossel: ver "Variação de formato" abaixo.
