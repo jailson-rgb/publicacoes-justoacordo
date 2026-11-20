@@ -276,3 +276,8 @@ As duas marcas usam os MESMOS desenhos (cada uma na sua identidade). Para os per
   sugere. Na Advocacia Soares, turbinar só conteúdo informativo (Provimento 205/2021: impulsionamento permitido para
   publicação informativa, sem captação, sem promessa).
 - Se o relatório trouxer "Avisos da API", avisar o Jailson (ex.: falta a permissão de insights no token).
+
+## Fonte: Diário Oficial (Jailson, 20/11/2026)
+- Consultar também o **Diário Oficial da União** (in.gov.br, Seção 1) com o filtro da marca: crédito, cobrança
+  extrajudicial, títulos, protesto, garantias, inadimplência e normas que afetem empresas credoras. Norma nova
+  relevante vira post informativo com fonte "DOU de dd/mm/aaaa". Sem mencionar escritório/advocacia/OAB.
