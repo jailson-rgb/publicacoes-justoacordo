@@ -22,8 +22,8 @@ Também serve de guia para pedidos avulsos.
 - Tom do manual da marca: seguro, amigável, confiante, cordial – "sério sem ser rígido". Linguagem de empresário.
 
 ## Grade (horário de Brasília)
-- **STORY SEG, QUA E SEX às 10:30** (decisão do Jailson, 26/11/2026; antes era todo dia útil, desde 18/11; horário
-  diferente dos stories da Soares). Terça e quinta: sem story diário (o feed de ter/qui segue igual). Rodízio:
+- **STORY SEG, QUA E SEX às 10:30** (decisão do Jailson, 26/11/2026; antes era todo dia útil, desde 18/11; a Soares também
+  só tem story seg/qua/sex; pode coincidir o dia/horário, ok do Jailson). Terça e quinta: sem story diário (o feed de ter/qui segue igual). Rodízio:
   - Segunda – **Placar** (acumulado) ou **Nesta semana** (se passar no piso, ver abaixo);
   - Quarta – alternar semana a semana: **dica para o credor** (boas práticas de crédito e cobrança) ou
     **mito x verdade / você sabia?** (título executivo, prescrição, protesto, negociação, garantias no acordo);
