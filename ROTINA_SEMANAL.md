@@ -280,3 +280,10 @@ As duas marcas usam os MESMOS desenhos (cada uma na sua identidade). Para os per
 - Consultar também o **Diário Oficial da União** (in.gov.br, Seção 1) com o filtro da marca: crédito, cobrança
   extrajudicial, títulos, protesto, garantias, inadimplência e normas que afetem empresas credoras. Norma nova
   relevante vira post informativo com fonte "DOU de dd/mm/aaaa". Sem mencionar escritório/advocacia/OAB.
+
+## Fonte: Justiça em Números do CNJ (Jailson, 26/11/2026)
+- Usar o relatório anual Justiça em Números (CNJ) como fonte fixa de dados do Judiciário. Números, ângulos e ritmo em
+  fontes/justica-em-numeros.md: 1 post de feed a cada 2 semanas ALTERNANDO as marcas (uma semana Soares, a seguinte
+  Justo Acordo) e stories com esses números em qualquer semana. Citar "CNJ, Justiça em Números 2026 (ano-base 2025)";
+  conferir cada número no PDF oficial antes de usar.
+
